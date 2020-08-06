@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "Pages/*": ["Pages/*"],
+      "Types/*": ["types/*"],
+      "Components/*": ["Components/*"]
+    },
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "module": "commonjs",
+    "target": "ES2020",
+    "jsx": "react",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "lib": ["dom", "es2015"]
+  },
+  "include": ["src/**/*"]
+}
