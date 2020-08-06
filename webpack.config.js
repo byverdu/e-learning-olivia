@@ -1,27 +1,26 @@
-const path = require("path");
-const webpack = require("webpack");
-const { TsconfigPathsPlugin } = require("tsconfig-paths-webpack-plugin");
-const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path')
+const webpack = require('webpack')
+const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const ENV = process.env.ENV;
+const ENV = process.env.ENV
 
 module.exports = function () {
   const outputPath =
-    ENV === "development" ? __dirname + "/dev-build" : __dirname + "/build";
+    ENV === 'development' ? __dirname + '/dev-build' : __dirname + '/build'
 
   return {
     mode: ENV,
-    entry: "./src/index.tsx",
+    entry: './src/index.tsx',
 
     cache: false,
 
     output: {
       path: outputPath,
-      filename: "script/bundle.js",
-      libraryTarget: "umd",
+      filename: 'script/bundle.js',
+      libraryTarget: 'umd',
     },
 
     devServer: {
@@ -32,16 +31,16 @@ module.exports = function () {
     },
 
     // Enable sourcemaps for debugging webpack's output.
-    devtool: ENV === "development" ? "source-map" : undefined,
+    devtool: ENV === 'development' ? 'source-map' : undefined,
 
     resolve: {
       // Add '.ts' and '.tsx' as resolvable extensions.
-      extensions: [".ts", ".tsx", ".js", ".scss", ".json"],
-      modules: [path.join(__dirname, "node_modules")],
+      extensions: ['.ts', '.tsx', '.js', '.scss', '.json'],
+      modules: [path.join(__dirname, 'node_modules')],
       plugins: [
         new TsconfigPathsPlugin({
-          configFile: "./tsconfig.json",
-          baseUrl: "src",
+          configFile: './tsconfig.json',
+          baseUrl: 'src',
         }),
       ],
     },
@@ -54,19 +53,7 @@ module.exports = function () {
 
       // Webpack plugin that runs TypeScript type checker on a separate process.
       new ForkTsCheckerWebpackPlugin(),
-      new HtmlWebpackPlugin({ template: "./src/index.html" }),
-
-      // new CopyPlugin([
-      //   {
-      //     from: "src/images/*",
-      //     to: "./images",
-      //     flatten: true,
-      //   },
-      //   {
-      //     from: "manifest.json",
-      //     to: "./",
-      //   },
-      // ]),
+      new HtmlWebpackPlugin({ template: './src/index.html' }),
     ],
 
     module: {
@@ -76,7 +63,7 @@ module.exports = function () {
           exclude: /node_modules/,
           use: [
             {
-              loader: "ts-loader",
+              loader: 'ts-loader',
               options: {
                 transpileOnly: true,
               },
@@ -86,20 +73,20 @@ module.exports = function () {
         {
           test: /\.s[ac]ss$/i,
           use: [
-            "style-loader",
-            "css-modules-typescript-loader",
+            'style-loader',
+            'css-modules-typescript-loader',
             {
-              loader: "css-loader",
+              loader: 'css-loader',
               options: {
                 modules: {
-                  localIdentName: "[name]__[local]--[hash:base64:5]",
+                  localIdentName: '[name]__[local]--[hash:base64:5]',
                 },
               },
             },
-            "sass-loader",
+            'sass-loader',
           ],
         },
       ],
     },
-  };
-};
+  }
+}
