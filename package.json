@@ -6,15 +6,18 @@
   "scripts": {
     "dev": "ENV=development webpack-dev-server --watch",
     "build": "ENV=production webpack",
-    "lint": "eslint --ignore-pattern **/**/*.scss.d.ts . --ext .ts,.tsx",
-    "lint:fix": "yarn lint --fix"
+    "lint:ts": "eslint --ignore-pattern **/**/*.scss.d.ts . --ext .ts,.tsx",
+    "lint:ts:fix": "yarn lint --fix",
+    "lint:css": "stylelint **/**/*scss",
+    "lint:css:fix": "stylelint **/**/*scss --fix",
+    "lint:all": "yarn lint:ts && yarn lint:css"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/byverdu/e-learning-olivia.git"
   },
   "pre-commit": [
-    "lint"
+    "lint:all"
   ],
   "author": "@byverdu",
   "devDependencies": {
@@ -42,6 +45,9 @@
     "prettier": "^2.0.5",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.1.3",
+    "stylelint": "^13.6.1",
+    "stylelint-config-sass-guidelines": "^7.0.0",
+    "stylelint-order": "^4.1.0",
     "ts-loader": "^6.2.1",
     "tsconfig-paths-webpack-plugin": "^3.2.0",
     "typescript": "^3.7.5",
