@@ -1,12 +1,9 @@
 {
-  "singleQuote": true,
-  "jsxBracketSameLine": false,
-  "bracketSpacing": true,
-  "printWidth": 80,
+  "trailingComma": "es5",
   "tabWidth": 2,
-  "useTabs": false,
   "semi": false,
-  "encoding": "utf-8",
-  "extensions": [".tsx", ".ts", ".scss", ".js"],
-  "endOfLine": "lf"
+  "singleQuote": true,
+  "arrowParens": "avoid",
+  "printWidth": 50,
+  "jsxBracketSameLine": false
 }

@@ -1,15 +1,21 @@
 const path = require('path')
 const webpack = require('webpack')
-const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin')
+const {
+  TsconfigPathsPlugin,
+} = require('tsconfig-paths-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const {
+  CleanWebpackPlugin,
+} = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const ENV = process.env.ENV
 
 module.exports = function () {
   const outputPath =
-    ENV === 'development' ? __dirname + '/dev-build' : __dirname + '/build'
+    ENV === 'development'
+      ? __dirname + '/dev-build'
+      : __dirname + '/build'
 
   return {
     mode: ENV,
@@ -24,19 +30,33 @@ module.exports = function () {
     },
 
     devServer: {
-      contentBase: path.join(__dirname, outputPath),
+      contentBase: path.join(
+        __dirname,
+        outputPath
+      ),
       compress: true,
       port: 9000,
       hot: true,
     },
 
     // Enable sourcemaps for debugging webpack's output.
-    devtool: ENV === 'development' ? 'source-map' : undefined,
+    devtool:
+      ENV === 'development'
+        ? 'source-map'
+        : undefined,
 
     resolve: {
       // Add '.ts' and '.tsx' as resolvable extensions.
-      extensions: ['.ts', '.tsx', '.js', '.scss', '.json'],
-      modules: [path.join(__dirname, 'node_modules')],
+      extensions: [
+        '.ts',
+        '.tsx',
+        '.js',
+        '.scss',
+        '.json',
+      ],
+      modules: [
+        path.join(__dirname, 'node_modules'),
+      ],
       plugins: [
         new TsconfigPathsPlugin({
           configFile: './tsconfig.json',
@@ -46,14 +66,18 @@ module.exports = function () {
     },
 
     plugins: [
-      new webpack.WatchIgnorePlugin([/css\.d\.ts$/]),
+      new webpack.WatchIgnorePlugin([
+        /css\.d\.ts$/,
+      ]),
       new CleanWebpackPlugin({
         cleanStaleWebpackAssets: false,
       }),
 
       // Webpack plugin that runs TypeScript type checker on a separate process.
       new ForkTsCheckerWebpackPlugin(),
-      new HtmlWebpackPlugin({ template: './src/index.html' }),
+      new HtmlWebpackPlugin({
+        template: './src/index.html',
+      }),
     ],
 
     module: {
@@ -79,7 +103,8 @@ module.exports = function () {
               loader: 'css-loader',
               options: {
                 modules: {
-                  localIdentName: '[name]__[local]--[hash:base64:5]',
+                  localIdentName:
+                    '[name]__[local]--[hash:base64:5]',
                 },
               },
             },
