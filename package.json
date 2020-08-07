@@ -1,0 +1,67 @@
+{
+  "name": "e-learning-olivia",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bundle.js",
+  "scripts": {
+    "dev": "ENV=development webpack-dev-server --watch",
+    "build": "ENV=production webpack",
+    "lint:ts": "eslint --ignore-pattern **/**/*.scss.d.ts . --ext .ts,.tsx",
+    "lint:ts:fix": "yarn lint --fix",
+    "lint:css": "stylelint **/**/*scss",
+    "lint:css:fix": "stylelint **/**/*scss --fix",
+    "lint:all": "yarn lint:ts && yarn lint:css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/byverdu/e-learning-olivia.git"
+  },
+  "pre-commit": [
+    "lint:all"
+  ],
+  "author": "@byverdu",
+  "devDependencies": {
+    "@types/eslint": "^7.2.0",
+    "@types/react": "^16.9.17",
+    "@types/react-dom": "^16.9.4",
+    "@typescript-eslint/eslint-plugin": "^3.6.1",
+    "@typescript-eslint/parser": "^3.8.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.4.2",
+    "css-modules-typescript-loader": "^4.0.0",
+    "eslint": "^7.6.0",
+    "eslint-config-airbnb-typescript": "^9.0.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-react-hooks": "^4.0.8",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "fork-ts-checker-webpack-plugin": "^4.0.3",
+    "html-webpack-plugin": "^4.3.0",
+    "node-sass": "^4.13.1",
+    "pre-commit": "^1.2.2",
+    "prettier": "^2.0.5",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.1.3",
+    "stylelint": "^13.6.1",
+    "stylelint-config-sass-guidelines": "^7.0.0",
+    "stylelint-order": "^4.1.0",
+    "ts-loader": "^6.2.1",
+    "tsconfig-paths-webpack-plugin": "^3.2.0",
+    "typescript": "^3.7.5",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/byverdu/e-learning-olivia/issues"
+  },
+  "homepage": "https://github.com/byverdu/e-learning-olivia#readme",
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}
