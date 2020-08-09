@@ -14,12 +14,7 @@ module.exports = {
     },
     project: './tsconfig.json',
   },
-  plugins: [
-    'react',
-    'prettier',
-    '@typescript-eslint',
-    'react-hooks',
-  ],
+  plugins: ['react', 'prettier', '@typescript-eslint', 'react-hooks'],
   extends: [
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
@@ -29,6 +24,17 @@ module.exports = {
     'airbnb-typescript',
   ],
   rules: {
+    // eslint
+    'implicit-arrow-linebreak': 0,
+    'function-paren-newline': 0,
+    'arrow-parens': [2, 'as-needed'],
+
+    // typescript
     '@typescript-eslint/semi': 0,
+
+    // react
+    'jsx-a11y/click-events-have-key-events': 0,
+    'jsx-a11y/no-noninteractive-element-interactions': 0,
+    'react/jsx-one-expression-per-line': 0,
   },
 }

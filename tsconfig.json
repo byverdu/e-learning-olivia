@@ -4,7 +4,8 @@
     "paths": {
       "Pages/*": ["Pages/*"],
       "Types/*": ["types/*"],
-      "Components/*": ["Components/*"]
+      "Components/*": ["Components/*"],
+      "Assets/*": ["Assets/*"]
     },
     "sourceMap": true,
     "noImplicitAny": false,
@@ -15,5 +16,5 @@
     "allowSyntheticDefaultImports": true,
     "lib": ["dom", "es2015"]
   },
-  "include": ["src/**/*"]
+  "include": ["./typings/*", "./src/**/*.ts", "./src/**/*.tsx"]
 }

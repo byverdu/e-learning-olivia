@@ -4,12 +4,12 @@ const {
   TsconfigPathsPlugin,
 } = require('tsconfig-paths-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
-const {
-  CleanWebpackPlugin,
-} = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const getBabelConfig = require('./config-babel.js')
 
 const ENV = process.env.ENV
+const baseDir = './src'
 
 module.exports = function () {
   const outputPath =
@@ -19,7 +19,7 @@ module.exports = function () {
 
   return {
     mode: ENV,
-    entry: './src/index.tsx',
+    entry: `${baseDir}/index.tsx`,
 
     cache: false,
 
@@ -30,45 +30,30 @@ module.exports = function () {
     },
 
     devServer: {
-      contentBase: path.join(
-        __dirname,
-        outputPath
-      ),
+      contentBase: path.join(__dirname, outputPath),
       compress: true,
       port: 9000,
       hot: true,
+      open: true,
     },
 
     // Enable sourcemaps for debugging webpack's output.
-    devtool:
-      ENV === 'development'
-        ? 'source-map'
-        : undefined,
+    devtool: ENV === 'development' ? 'source-map' : undefined,
 
     resolve: {
       // Add '.ts' and '.tsx' as resolvable extensions.
-      extensions: [
-        '.ts',
-        '.tsx',
-        '.js',
-        '.scss',
-        '.json',
-      ],
-      modules: [
-        path.join(__dirname, 'node_modules'),
-      ],
+      extensions: ['.ts', '.tsx', '.js', '.scss', '.json'],
+      modules: [path.join(__dirname, 'node_modules')],
       plugins: [
         new TsconfigPathsPlugin({
           configFile: './tsconfig.json',
-          baseUrl: 'src',
+          baseUrl: baseDir,
         }),
       ],
     },
 
     plugins: [
-      new webpack.WatchIgnorePlugin([
-        /css\.d\.ts$/,
-      ]),
+      new webpack.WatchIgnorePlugin([/css\.d\.ts$/]),
       new CleanWebpackPlugin({
         cleanStaleWebpackAssets: false,
       }),
@@ -85,14 +70,20 @@ module.exports = function () {
         {
           test: /\.ts(x?)$/,
           exclude: /node_modules/,
-          use: [
-            {
-              loader: 'ts-loader',
-              options: {
-                transpileOnly: true,
-              },
-            },
-          ],
+          include: path.resolve(process.cwd(), './'),
+          loader: 'babel-loader',
+          options: {
+            ...getBabelConfig(),
+          },
+        },
+        {
+          test: /\.jsx?$/,
+          exclude: /node_modules/,
+          include: path.resolve(process.cwd(), './'),
+          loader: 'babel-loader',
+          options: {
+            ...getBabelConfig(),
+          },
         },
         {
           test: /\.s[ac]ss$/i,
@@ -103,12 +94,22 @@ module.exports = function () {
               loader: 'css-loader',
               options: {
                 modules: {
-                  localIdentName:
-                    '[name]__[local]--[hash:base64:5]',
+                  localIdentName: '[name]__[local]--[hash:base64:5]',
                 },
               },
             },
             'sass-loader',
+          ],
+        },
+        {
+          test: /\.svg$/,
+          use: [
+            {
+              loader: '@svgr/webpack',
+              options: {
+                ref: true,
+              },
+            },
           ],
         },
       ],
