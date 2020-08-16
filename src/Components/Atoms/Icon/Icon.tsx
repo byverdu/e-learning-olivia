@@ -6,7 +6,7 @@ import React, {
   useRef,
 } from 'react'
 
-type SvgIcons = 'star'
+export type SvgIcons = 'star'
 
 interface Props {
   className?: string
@@ -42,9 +42,7 @@ export const Icon: FunctionComponent<Props> = ({
     <Suspense fallback="Loading">
       <LazyIcon className={className} />
     </Suspense>
-  ) : (
-    <div>Icon {name}, not Found</div>
-  )
+  ) : null
 }
 
 Icon.defaultProps = {
