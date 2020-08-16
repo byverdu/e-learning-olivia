@@ -42,7 +42,7 @@ module.exports = function () {
 
     resolve: {
       // Add '.ts' and '.tsx' as resolvable extensions.
-      extensions: ['.ts', '.tsx', '.js', '.scss', '.json'],
+      extensions: ['.ts', '.tsx', '.js', '.scss', '.json', 'css'],
       modules: [path.join(__dirname, 'node_modules')],
       plugins: [
         new TsconfigPathsPlugin({

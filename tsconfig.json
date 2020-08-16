@@ -1,12 +1,6 @@
 {
   "compilerOptions": {
     "baseUrl": "./src",
-    "paths": {
-      "Pages/*": ["Pages/*"],
-      "Types/*": ["types/*"],
-      "Components/*": ["Components/*"],
-      "Assets/*": ["Assets/*"]
-    },
     "sourceMap": true,
     "noImplicitAny": false,
     "module": "commonjs",
@@ -16,5 +10,5 @@
     "allowSyntheticDefaultImports": true,
     "lib": ["dom", "es2015"]
   },
-  "include": ["./typings/*", "./src/**/*.ts", "./src/**/*.tsx"]
+  "include": ["./typings/*", "./src/**/*"]
 }
