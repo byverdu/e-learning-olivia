@@ -1,11 +1,6 @@
 {
   "compilerOptions": {
     "baseUrl": "./src",
-    "paths": {
-      "Pages/*": ["Pages/*"],
-      "Types/*": ["types/*"],
-      "Components/*": ["Components/*"]
-    },
     "sourceMap": true,
     "noImplicitAny": false,
     "module": "commonjs",
@@ -15,5 +10,5 @@
     "allowSyntheticDefaultImports": true,
     "lib": ["dom", "es2015"]
   },
-  "include": ["src/**/*"]
+  "include": ["./typings/*", "./src/**/*"]
 }
