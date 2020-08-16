@@ -52,7 +52,7 @@
     "extract-text-webpack-plugin": "^3.0.2",
     "fork-ts-checker-webpack-plugin": "^4.0.3",
     "html-webpack-plugin": "^4.3.0",
-    "node-sass": "^4.13.1",
+    "node-sass-chokidar": "^1.5.0",
     "pre-commit": "^1.2.2",
     "prettier": "^2.0.5",
     "sass-loader": "^8.0.2",
@@ -74,6 +74,7 @@
   },
   "homepage": "https://github.com/byverdu/e-learning-olivia#readme",
   "dependencies": {
+    "classnames": "^2.2.6",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   }

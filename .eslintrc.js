@@ -28,6 +28,7 @@ module.exports = {
     'implicit-arrow-linebreak': 0,
     'function-paren-newline': 0,
     'arrow-parens': [2, 'as-needed'],
+    'import/prefer-default-export': 0,
 
     // typescript
     '@typescript-eslint/semi': 0,
