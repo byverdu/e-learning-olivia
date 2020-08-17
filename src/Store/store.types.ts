@@ -1,6 +1,6 @@
 import { Dispatch } from 'react'
 
-export type ActionsTypes = 'game-init'
+export type ActionsTypes = 'game-init' | 'game-reset'
 
 export interface Actions {
   type: ActionsTypes
