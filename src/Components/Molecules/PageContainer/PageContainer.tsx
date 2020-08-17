@@ -1,5 +1,7 @@
 import React, { FunctionComponent } from 'react'
 
+import styles from './pageContainer.scss'
+
 type PagesType = 'main'
 
 interface Props {
@@ -10,16 +12,18 @@ const pageTitles = new Map<PagesType, string>([
   ['main', 'Select Your Game Type'],
 ])
 
-export const Main: FunctionComponent<Props> = ({
+const PageContainer: FunctionComponent<Props> = ({
   children,
-  activePage = 'main',
+  activePage,
 }) => {
   const title = pageTitles.get(activePage)
 
   return (
-    <section>
-      <h1>{title}</h1>
+    <section className={styles.container}>
+      <h1 className={styles.title}>{title}</h1>
       {children}
     </section>
   )
 }
+
+export default PageContainer
