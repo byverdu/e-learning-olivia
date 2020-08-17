@@ -26,10 +26,16 @@ const Scoreboard: FunctionComponent = () => {
   const resetGame = useCallback(() => {
     dispatch(Actions.gameReset())
   }, [dispatch])
+  const increaseGame = useCallback(() => {
+    dispatch(Actions.gameIncrease())
+  }, [dispatch])
   return (
     <>
       <button onClick={resetGame} type="button">
         Reset
+      </button>
+      <button onClick={increaseGame} type="button">
+        UP UP
       </button>
       <div>{icons}</div>
     </>
