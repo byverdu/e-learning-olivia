@@ -52,6 +52,9 @@ module.exports = function () {
             }
           })()
         })
+        app.get('/mockData', (req, res) => {
+          res.json(require('./src/mockData/index.json'))
+        })
       },
     },
 
