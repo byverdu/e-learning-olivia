@@ -1,6 +1,8 @@
 import { from, of } from 'rxjs'
 import { fromFetch } from 'rxjs/fetch'
-import { map, switchMap, catchError, tap } from 'rxjs/operators'
+import {
+  map, switchMap, catchError, tap,
+} from 'rxjs/operators'
 
 interface YoutubeItem {
   id: {
