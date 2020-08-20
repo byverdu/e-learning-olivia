@@ -1,4 +1,4 @@
-import { Actions, ActionsTypes } from './store.types'
+import { Actions, ActionsTypes, ContextState } from './store.types'
 
 const actionCreators = (
   type: ActionsTypes,
@@ -12,3 +12,9 @@ export const gameReset = (): Actions => actionCreators('game-reset')
 
 export const gameIncrease = (): Actions =>
   actionCreators('game-increase')
+
+export const fetchVideos = (payload: ContextState['videos']): Actions =>
+  actionCreators('fetch-videos', payload)
+
+export const playVideo = (): Actions =>
+  actionCreators('play-video')

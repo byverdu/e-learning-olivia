@@ -3,6 +3,8 @@ import {
   gameInitReducer,
   gameResetReducer,
   gameInCreaseReducer,
+  fetchVideosReducer,
+  playVideoReducer,
 } from './reducerActions'
 
 const reducer = (
@@ -19,6 +21,12 @@ const reducer = (
 
     case 'game-increase':
       return gameInCreaseReducer(state)
+
+    case 'fetch-videos':
+      return fetchVideosReducer(state, payload)
+
+    case 'play-video':
+      return playVideoReducer(state)
 
     default:
       return state

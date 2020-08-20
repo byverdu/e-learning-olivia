@@ -4,6 +4,8 @@ export type ActionsTypes =
   | 'game-init'
   | 'game-reset'
   | 'game-increase'
+  | 'fetch-videos'
+  | 'play-video'
 
 export interface Actions {
   type: ActionsTypes
@@ -13,6 +15,15 @@ export interface Actions {
 export interface ContextState {
   scoreCount: number
   score?: { active: boolean; id: number }[]
+  videos?: {
+    fetched: boolean
+    list: string[]
+  }
+  playback: {
+    src: string
+    track: number
+    isPlaying: boolean
+  }
 }
 
 export interface AppState {

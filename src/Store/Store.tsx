@@ -15,6 +15,15 @@ export const Store: FunctionComponent = ({ children }) => {
   const initialState: ContextState = {
     scoreCount: 0,
     score: [],
+    videos: {
+      list: [],
+      fetched: false,
+    },
+    playback: {
+      src: '',
+      track: 0,
+      isPlaying: false,
+    },
   }
 
   const [state, dispatch] = useReducer(reducer, initialState)
