@@ -14,7 +14,10 @@ export const gameIncrease = (): Actions =>
   actionCreators('game-increase')
 
 export const fetchVideos = (payload: ContextState['videos']): Actions =>
-  actionCreators('fetch-videos', payload)
+  actionCreators('video-fetch-list', payload)
 
 export const playVideo = (): Actions =>
-  actionCreators('play-video')
+  actionCreators('video-play-list')
+
+export const getVideoPlayer = (payload: unknown): Actions =>
+  actionCreators('video-get-player', payload)

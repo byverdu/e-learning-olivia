@@ -67,3 +67,11 @@ export const playVideoReducer = (
     },
   })
 }
+
+export const getVideoPlayerReducer = (
+  state: ContextState,
+  payload: unknown,
+): ContextState => ({
+  ...state,
+  player: payload as ContextState['player'],
+})
