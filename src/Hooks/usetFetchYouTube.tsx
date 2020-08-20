@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import { getYouTubeSearchResults } from 'utils'
 
-export const useYouTubeSearch = query => {
+export const useYouTubeSearch = (query: string) => {
   const [resp, setResp] = useState(undefined)
 
   useEffect(() => {
