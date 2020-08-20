@@ -31,10 +31,16 @@ const Scoreboard: FunctionComponent = () => {
   }, [dispatch])
   return (
     <>
-      <button onClick={resetGame} type="button">
+      <button
+        onClick={resetGame}
+        type="button"
+      >
         Reset
       </button>
-      <button onClick={increaseGame} type="button">
+      <button
+        onClick={increaseGame}
+        type="button"
+      >
         UP UP
       </button>
       <div>{icons}</div>

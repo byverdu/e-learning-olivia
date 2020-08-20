@@ -29,7 +29,11 @@ const CountSelector: FunctionComponent = () => {
       <h6 onClick={toggleOptions}>Select Game Length</h6>
       <ul className={classNames({ [styles.hidden]: hideOptions })}>
         {options.map(item => (
-          <li key={item} data-id={item} onClick={selectOptions}>
+          <li
+            key={item}
+            data-id={item}
+            onClick={selectOptions}
+          >
             {item}
           </li>
         ))}
