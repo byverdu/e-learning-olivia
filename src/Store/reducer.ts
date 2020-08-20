@@ -5,6 +5,7 @@ import {
   gameInCreaseReducer,
   fetchVideosReducer,
   playVideoReducer,
+  getVideoPlayerReducer,
 } from './reducerActions'
 
 const reducer = (
@@ -22,11 +23,14 @@ const reducer = (
     case 'game-increase':
       return gameInCreaseReducer(state)
 
-    case 'fetch-videos':
+    case 'video-fetch-list':
       return fetchVideosReducer(state, payload)
 
-    case 'play-video':
+    case 'video-play-list':
       return playVideoReducer(state)
+
+    case 'video-get-player':
+      return getVideoPlayerReducer(state, payload)
 
     default:
       return state

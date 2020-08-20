@@ -1,27 +1,28 @@
-import React, { FunctionComponent, useContext } from 'react'
+import React, { FunctionComponent, useContext, useEffect } from 'react'
 import { AppContext } from 'Store'
 
 const YouTubeVideo: FunctionComponent = () => {
   const {
     state: {
+      player,
       videos: { fetched },
       playback: { src: videoSrc, isPlaying },
     },
   } = useContext(AppContext)
 
+  useEffect(() => {
+    // eslint-disable-next-line no-new
+    new player.Player('player', {
+      height: '390',
+      width: '640',
+      videoId: videoSrc,
+    })
+  }, [player, videoSrc])
+
   return (
     <>
       {fetched && isPlaying && (
-      <iframe
-        title="paw patroli"
-        width="560"
-        height="315"
-        src={`https://www.youtube.com/embed/${videoSrc}`}
-    // src="https://www.youtube.com/embed/5mfHff-nvIA?autoplay=1"
-        frameBorder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-      />
+        <div id="player" />
       )}
     </>
   )

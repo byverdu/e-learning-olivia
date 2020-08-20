@@ -4,8 +4,9 @@ export type ActionsTypes =
   | 'game-init'
   | 'game-reset'
   | 'game-increase'
-  | 'fetch-videos'
-  | 'play-video'
+  | 'video-fetch-list'
+  | 'video-play-list'
+  | 'video-get-player'
 
 export interface Actions {
   type: ActionsTypes
@@ -24,6 +25,7 @@ export interface ContextState {
     track: number
     isPlaying: boolean
   }
+  player: typeof YT
 }
 
 export interface AppState {
