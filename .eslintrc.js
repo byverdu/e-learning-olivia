@@ -14,12 +14,10 @@ module.exports = {
     },
     project: './tsconfig.json',
   },
-  plugins: ['react', 'prettier', '@typescript-eslint', 'react-hooks'],
+  plugins: ['react', '@typescript-eslint', 'react-hooks'],
   extends: [
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
-    'prettier/@typescript-eslint',
-    'plugin:prettier/recommended',
     'plugin:react-hooks/recommended',
     'airbnb-typescript',
   ],
@@ -29,6 +27,7 @@ module.exports = {
     'function-paren-newline': 0,
     'arrow-parens': [2, 'as-needed'],
     'import/prefer-default-export': 0,
+    'quotes': [1, 'single'],
 
     // typescript
     '@typescript-eslint/semi': 0,
@@ -36,7 +35,7 @@ module.exports = {
     // react
     'jsx-a11y/click-events-have-key-events': 0,
     'jsx-a11y/no-noninteractive-element-interactions': 0,
-    'react/jsx-one-expression-per-line': 0,
     'react/prop-types': 0,
+    'react/jsx-max-props-per-line': [2, { "maximum": 1 }]
   },
 }
