@@ -2,22 +2,45 @@ import React, {
   createContext,
   FunctionComponent,
   useReducer,
+  useEffect,
 } from 'react'
+import { Actions } from 'Store'
 import { ContextState, AppState } from './store.types'
 import reducer from './reducer'
+import withScriptLoader from '../HOC'
 
 export const AppContext = createContext<AppState | undefined>(
   undefined,
 )
 
+interface Props {
+  player: string
+}
+
 // eslint-disable-next-line react/prop-types
-export const Store: FunctionComponent = ({ children }) => {
+const Store: FunctionComponent<Props> = ({ children, player }) => {
   const initialState: ContextState = {
     scoreCount: 0,
     score: [],
+    videos: {
+      list: [],
+      fetched: false,
+    },
+    playback: {
+      src: '',
+      track: 0,
+      isPlaying: false,
+    },
+    player: undefined,
   }
 
   const [state, dispatch] = useReducer(reducer, initialState)
+
+  useEffect(() => {
+    if (player) {
+      dispatch(Actions.getVideoPlayer(player))
+    }
+  }, [player])
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>
@@ -25,3 +48,5 @@ export const Store: FunctionComponent = ({ children }) => {
     </AppContext.Provider>
   )
 }
+
+export default withScriptLoader(Store)

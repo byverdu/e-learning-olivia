@@ -1,4 +1,12 @@
 import { ContextState, Actions } from './store.types'
+import {
+  gameInitReducer,
+  gameResetReducer,
+  gameInCreaseReducer,
+  fetchVideosReducer,
+  playVideoReducer,
+  getVideoPlayerReducer,
+} from './reducerActions'
 
 const reducer = (
   state: ContextState,
@@ -6,20 +14,24 @@ const reducer = (
 ): ContextState => {
   const { type, payload } = action
   switch (type) {
-    case 'game-init': {
-      const score = Array.from(
-        { length: Number(payload) },
-        (_, index) => ({
-          id: index,
-          active: false,
-        }),
-      )
+    case 'game-init':
+      return gameInitReducer(state, payload)
 
-      return {
-        ...state,
-        score,
-      }
-    }
+    case 'game-reset':
+      return gameResetReducer(state)
+
+    case 'game-increase':
+      return gameInCreaseReducer(state)
+
+    case 'video-fetch-list':
+      return fetchVideosReducer(state, payload)
+
+    case 'video-play-list':
+      return playVideoReducer(state)
+
+    case 'video-get-player':
+      return getVideoPlayerReducer(state, payload)
+
     default:
       return state
   }

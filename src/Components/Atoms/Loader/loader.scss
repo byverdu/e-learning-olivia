@@ -1,0 +1,45 @@
+.loader {
+  align-items: center;
+  background: rgba(1, 1, 1, 0.5);
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  width: 100%;
+
+  &-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+    &.small {
+      height: 100px;
+      width: 100px;
+    }
+
+    &.medium {
+      height: 300px;
+      width: 300px;
+    }
+
+    &.large {
+      height: 500px;
+      width: 500px;
+
+      .loader-text {
+        bottom: 30px;
+        font-size: 20px;
+      }
+    }
+  }
+
+  &-text {
+    bottom: 30px;
+    font-size: 20px;
+    position: absolute;
+  }
+
+  &-img {
+    border-radius: 500px;
+    box-shadow: -2px 4px 10px rgb(22, 21, 21), 4px -2px 10px rgb(22, 21, 21);
+  }
+}
