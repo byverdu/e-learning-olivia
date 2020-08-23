@@ -1,0 +1,19 @@
+.search-card {
+  margin: 10px;
+  position: relative;
+
+  &.selected {
+    &::before {
+      align-items: center;
+      background: rgba(255, 255, 255, 0.8);
+      color: rgb(156, 4, 161);
+      content: "\02713";
+      display: flex;
+      font-size: 100px;
+      height: 100%;
+      justify-content: center;
+      position: absolute;
+      width: 100%;
+    }
+  }
+}

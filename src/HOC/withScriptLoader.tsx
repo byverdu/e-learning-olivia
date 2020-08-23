@@ -1,11 +1,13 @@
-import React, { Component, ReactNode } from 'react'
+import React, {
+  Component, ReactNode, ComponentClass, FunctionComponent,
+} from 'react'
 import Loader from '../Components/Atoms/Loader/Loader';
 
 interface State { player: unknown }
 
 interface Props { children: ReactNode }
 
-export default function withScriptLoader(WrappedComponent) {
+export default function withScriptLoader(WrappedComponent: FunctionComponent<any>): ComponentClass {
   return class extends Component<Props, State> {
     scriptSrc = 'https://www.youtube.com/iframe_api'
 

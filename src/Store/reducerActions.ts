@@ -1,4 +1,111 @@
-import { ContextState } from './store.types'
+import { ContextState, SearchResult, VideoItem } from './store.types'
+
+export const searchResolvedReducer = (
+  state: ContextState,
+  payload: SearchResult[],
+): ContextState => {
+  const payloadCopy = payload.slice()
+  Object.keys(state.playList)
+    .forEach(videoId => {
+      const indexInPlayList = payloadCopy.findIndex(result => result.videoId === videoId)
+
+      if (indexInPlayList !== -1) {
+        payloadCopy[indexInPlayList].selected = true
+      }
+    })
+
+  return {
+    ...state,
+    searchResult: payloadCopy.reduce((prev, curr) => ({
+      ...prev,
+      [curr.videoId]: curr,
+    }), {}),
+  }
+}
+
+export const searchClearReducer = (
+  state: ContextState,
+): ContextState => ({
+  ...state,
+  searchResult: {},
+})
+
+export const showLoaderReducer = (
+  state: ContextState,
+  payload: string,
+): ContextState => ({
+  ...state,
+  loader: {
+    active: true,
+    text: payload,
+  },
+})
+
+export const hideLoaderReducer = (
+  state: ContextState,
+): ContextState => ({
+  ...state,
+  loader: {
+    active: false,
+    text: 'Loading...',
+  },
+})
+
+export const videoSelectedReducer = (
+  state: ContextState,
+  payload: string,
+): ContextState => {
+  const selectedVideo = state.searchResult[payload]
+
+  return ({
+    ...state,
+    searchResult: {
+      ...state.searchResult,
+      [selectedVideo.videoId]: {
+        ...selectedVideo,
+        selected: !selectedVideo.selected,
+      },
+    },
+  })
+}
+
+export const videoSetPlayListReducer = (
+  state: ContextState,
+): ContextState => {
+  const playList: {[key: string]: VideoItem} = Object.values(state.searchResult)
+    .filter((item: SearchResult) => item.selected)
+    .reduce((prev, curr: SearchResult) => ({
+      ...prev,
+      [curr.videoId]: {
+        videoId: curr.videoId,
+        thumbnail: curr.thumbnail,
+      },
+    }), {})
+
+  return {
+    ...state,
+    playList,
+  }
+}
+
+export const videoPlaylistClearReducer = (
+  state: ContextState,
+): ContextState => {
+  const searchResult = Object.values(state.searchResult)
+    .reduce((prev, curr: SearchResult) => ({
+      ...prev,
+      [curr.videoId]: {
+        ...curr,
+        selected: false,
+      },
+    }), {})
+
+  return {
+    ...state,
+    playList: {},
+    searchResult,
+  }
+}
 
 export const gameInitReducer = (
   state: ContextState,
@@ -68,10 +175,54 @@ export const playVideoReducer = (
   })
 }
 
-export const getVideoPlayerReducer = (
+export const videoSelectedReducer = (
+  state: ContextState,
+  payload: string,
+): ContextState => {
+  const selectedVideo = state.searchResult[payload]
+  selectedVideo.selected = !selectedVideo.selected
+
+  return ({
+    ...state,
+  })
+}
+
+export const searchClearReducer = (
+  state: ContextState,
+): ContextState => ({
+  ...state,
+  searchResult: {},
+})
+
+export const showLoaderReducer = (
+  state: ContextState,
+  payload: string,
+): ContextState => ({
+  ...state,
+  loader: {
+    active: true,
+    text: payload,
+  },
+})
+
+export const hideLoaderReducer = (
   state: ContextState,
   payload: unknown,
 ): ContextState => ({
   ...state,
-  player: payload as ContextState['player'],
+  loader: {
+    active: false,
+    text: 'Loading...',
+  },
+})
+
+export const searchResolvedReducer = (
+  state: ContextState,
+  payload: SearchResult[],
+): ContextState => ({
+  ...state,
+  searchResult: payload.reduce((prev, curr) => ({
+    ...prev,
+    [curr.videoId]: curr,
+  }), {}),
 })

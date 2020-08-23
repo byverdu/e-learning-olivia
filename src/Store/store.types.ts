@@ -4,16 +4,43 @@ export type ActionsTypes =
   | 'game-init'
   | 'game-reset'
   | 'game-increase'
+  | 'search-resolved'
+  | 'search-clear'
   | 'video-fetch-list'
+  | 'video-set-play-list'
+  | 'video-clear-play-list'
   | 'video-play-list'
-  | 'video-get-player'
+  | 'video-selected'
+  | 'loader-show'
+  | 'loader-hide'
+  | 'page-set-active'
+
+export type PagesType = 'main' | 'search'
 
 export interface Actions {
   type: ActionsTypes
   payload?: unknown
 }
 
+export interface SearchResult {
+  videoId: string,
+  thumbnail: string
+  selected: boolean
+}
+
+export interface VideoItem {
+  videoId: string,
+  thumbnail: string
+}
+
 export interface ContextState {
+  activePage: PagesType
+  loader: {
+    active: boolean,
+    text?: string
+  },
+  searchResult: {[key: string]: SearchResult}
+  playList: {[key: string]: VideoItem}
   scoreCount: number
   score?: { active: boolean; id: number }[]
   videos?: {
