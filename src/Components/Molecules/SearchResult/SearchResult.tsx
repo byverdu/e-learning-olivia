@@ -15,8 +15,9 @@ const SearchResult: FunctionComponent = () => {
 
   return (
     <section className={styles['search-result']}>
-      {searchResult.map(({ videoId, thumbnail, selected }) => (
+      {Object.values(searchResult).map(({ videoId, thumbnail, selected }) => (
         <SearchCard
+          key={videoId}
           selected={selected}
           onCardClick={clickCardHandler}
           videoId={videoId}

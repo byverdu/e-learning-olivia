@@ -10,7 +10,8 @@
     "allowSyntheticDefaultImports": true,
     "lib": [
       "dom",
-      "es2015"
+      "es2015",
+      "ES2017"
     ],
     "types": [
       "youtube"

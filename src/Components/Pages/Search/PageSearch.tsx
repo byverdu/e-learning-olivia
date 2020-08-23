@@ -32,7 +32,7 @@ const PageSearch: FunctionComponent = () => {
       >
         Clear Search
       </button>
-      {searchResult.length > 0 && <SearchResult />}
+      {Object.keys(searchResult).length > 0 && <SearchResult />}
     </section>
   )
 }

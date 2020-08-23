@@ -72,14 +72,11 @@ export const videoSelectedReducer = (
   state: ContextState,
   payload: string,
 ): ContextState => {
-  const resultsCopy = [...state.searchResult]
-  const selectedVideo = state.searchResult.findIndex(video => video.videoId === payload)
-  resultsCopy[selectedVideo].selected = !resultsCopy[selectedVideo].selected
+  const selectedVideo = state.searchResult[payload]
+  selectedVideo.selected = !selectedVideo.selected
 
-  resultsCopy.splice(selectedVideo, 1, resultsCopy[selectedVideo])
   return ({
     ...state,
-    searchResult: resultsCopy,
   })
 }
 
@@ -87,7 +84,7 @@ export const searchClearReducer = (
   state: ContextState,
 ): ContextState => ({
   ...state,
-  searchResult: [],
+  searchResult: {},
 })
 
 export const showLoaderReducer = (
@@ -117,5 +114,8 @@ export const searchResolvedReducer = (
   payload: SearchResult[],
 ): ContextState => ({
   ...state,
-  searchResult: payload,
+  searchResult: payload.reduce((prev, curr) => ({
+    ...prev,
+    [curr.videoId]: curr,
+  }), {}),
 })

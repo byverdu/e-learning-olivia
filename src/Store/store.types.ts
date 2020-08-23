@@ -32,7 +32,7 @@ export interface ContextState {
     active: boolean,
     text?: string
   },
-  searchResult: SearchResult[]
+  searchResult: {[key: string]: SearchResult}
   scoreCount: number
   score?: { active: boolean; id: number }[]
   videos?: {
