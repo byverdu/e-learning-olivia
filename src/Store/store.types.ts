@@ -7,6 +7,8 @@ export type ActionsTypes =
   | 'search-resolved'
   | 'search-clear'
   | 'video-fetch-list'
+  | 'video-set-play-list'
+  | 'video-clear-play-list'
   | 'video-play-list'
   | 'video-selected'
   | 'loader-show'
@@ -26,6 +28,11 @@ export interface SearchResult {
   selected: boolean
 }
 
+export interface VideoItem {
+  videoId: string,
+  thumbnail: string
+}
+
 export interface ContextState {
   activePage: PagesType
   loader: {
@@ -33,6 +40,7 @@ export interface ContextState {
     text?: string
   },
   searchResult: {[key: string]: SearchResult}
+  playList: {[key: string]: VideoItem}
   scoreCount: number
   score?: { active: boolean; id: number }[]
   videos?: {

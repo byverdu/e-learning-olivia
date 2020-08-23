@@ -11,6 +11,7 @@ const SearchResult: FunctionComponent = () => {
   const { state: { searchResult }, dispatch } = useContext(AppContext)
   const clickCardHandler = useCallback((videoId: string) => {
     dispatch(Actions.videoSelected(videoId))
+    dispatch(Actions.videoSetPlayList())
   }, [dispatch])
 
   return (

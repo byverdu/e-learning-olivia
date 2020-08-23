@@ -3,13 +3,15 @@ import {
   gameInitReducer,
   gameResetReducer,
   gameInCreaseReducer,
-  fetchVideosReducer,
-  playVideoReducer,
+  // fetchVideosReducer,
+  // playVideoReducer,
   videoSelectedReducer,
   showLoaderReducer,
   hideLoaderReducer,
   searchResolvedReducer,
-  // getVideoPlayerReducer,
+  searchClearReducer,
+  videoSetPlayListReducer,
+  videoPlaylistClearReducer,
 } from './reducerActions'
 
 const reducer = (
@@ -27,12 +29,6 @@ const reducer = (
     case 'game-increase':
       return gameInCreaseReducer(state)
 
-    case 'video-fetch-list':
-      return fetchVideosReducer(state, payload)
-
-    case 'video-play-list':
-      return playVideoReducer(state)
-
     case 'video-selected':
       return videoSelectedReducer(state, payload as string)
 
@@ -47,6 +43,18 @@ const reducer = (
 
     case 'search-clear':
       return searchClearReducer(state)
+
+    case 'video-set-play-list':
+      return videoSetPlayListReducer(state)
+
+    case 'video-clear-play-list':
+      return videoPlaylistClearReducer(state)
+
+      // case 'video-fetch-list':
+      //   return fetchVideosReducer(state, payload)
+
+      // case 'video-play-list':
+      //   return playVideoReducer(state)
 
       // case 'video-get-player':
       //   return getVideoPlayerReducer(state, payload)
