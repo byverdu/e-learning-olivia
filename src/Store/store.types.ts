@@ -6,7 +6,11 @@ export type ActionsTypes =
   | 'game-increase'
   | 'video-fetch-list'
   | 'video-play-list'
-  | 'video-get-player'
+  | 'loader-show'
+  | 'loader-hide'
+  | 'page-set-active'
+
+export type PagesType = 'main' | 'search' | 'error'
 
 export interface Actions {
   type: ActionsTypes
@@ -14,6 +18,11 @@ export interface Actions {
 }
 
 export interface ContextState {
+  activePage: PagesType
+  loader: {
+    active: boolean,
+    text?: string
+  },
   scoreCount: number
   score?: { active: boolean; id: number }[]
   videos?: {

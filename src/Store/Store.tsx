@@ -20,6 +20,11 @@ interface Props {
 // eslint-disable-next-line react/prop-types
 const Store: FunctionComponent<Props> = ({ children, player }) => {
   const initialState: ContextState = {
+    loader: {
+      active: false,
+      text: 'Loading...',
+    },
+    activePage: 'search',
     scoreCount: 0,
     score: [],
     videos: {

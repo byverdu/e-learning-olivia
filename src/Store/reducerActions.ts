@@ -68,10 +68,24 @@ export const playVideoReducer = (
   })
 }
 
-export const getVideoPlayerReducer = (
+export const showLoaderReducer = (
+  state: ContextState,
+  payload: string,
+): ContextState => ({
+  ...state,
+  loader: {
+    active: true,
+    text: payload,
+  },
+})
+
+export const hideLoaderReducer = (
   state: ContextState,
   payload: unknown,
 ): ContextState => ({
   ...state,
-  player: payload as ContextState['player'],
+  loader: {
+    active: false,
+    text: 'Loading...',
+  },
 })
