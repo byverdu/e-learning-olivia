@@ -1,15 +1,22 @@
-import { from, of } from 'rxjs'
-// import { fromFetch } from 'rxjs/fetch'
+import { from, of, Observable } from 'rxjs'
+import { fromFetch } from 'rxjs/fetch'
 import {
   map, switchMap, catchError, tap,
 } from 'rxjs/operators'
+
+type ThumbNail = { url: string, width: number, height: number }
 
 interface YoutubeItem {
   id: {
     videoId: string
   }
   snippet: {
-    liveBroadcastContent: 'live' | 'none'
+    liveBroadcastContent: 'live' | 'none',
+    thumbnails: {
+      default: ThumbNail
+      medium: ThumbNail
+      high: ThumbNail
+    }
   }
 }
 
@@ -17,12 +24,12 @@ interface YoutubeResp {
   items: YoutubeItem[]
 }
 
-// const fetchData = async (params: string) =>
-// fromFetch(
-//   `http://localhost:9000/youtube-search?search=${params}`,
-// )
-const fetchData = async () =>
-  from(fetch('/mockData'))
+const fetchData = async (params: string): Promise<Observable<YoutubeResp>> =>
+  fromFetch(
+    `http://localhost:9000/youtube-search?search=${params}`,
+  )
+  // const fetchData = async () =>
+  //   from(fetch('/mockData'))
     .pipe(
       switchMap(response => {
         if (response.ok) {
@@ -39,7 +46,10 @@ const fetchData = async () =>
       }),
     )
 
-export const getYouTubeSearchResults = async (params: string) =>
+export const getYouTubeSearchResults = async (params: string): Promise<{
+  videoIid: string,
+  thumbnail: string
+}[]> =>
   from(
     (await fetchData(params)).pipe(
       map((apiResp: YoutubeResp) =>
@@ -48,7 +58,10 @@ export const getYouTubeSearchResults = async (params: string) =>
             ({ snippet: { liveBroadcastContent } }) =>
               liveBroadcastContent === 'none',
           )
-          .map(({ id: { videoId } }) => videoId),
+          .map(({
+            id: { videoId },
+            snippet: { thumbnails: { high: { url: thumbnail } } },
+          }) => ({ videoId, thumbnail })),
       ),
       tap(console.log),
     ),
