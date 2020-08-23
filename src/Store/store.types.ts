@@ -4,8 +4,10 @@ export type ActionsTypes =
   | 'game-init'
   | 'game-reset'
   | 'game-increase'
+  | 'search-resolved'
   | 'video-fetch-list'
   | 'video-play-list'
+  | 'video-selected'
   | 'loader-show'
   | 'loader-hide'
   | 'page-set-active'
@@ -17,12 +19,19 @@ export interface Actions {
   payload?: unknown
 }
 
+export interface SearchResult {
+  videoId: string,
+  thumbnail: string
+  selected: boolean
+}
+
 export interface ContextState {
   activePage: PagesType
   loader: {
     active: boolean,
     text?: string
   },
+  searchResult: SearchResult[]
   scoreCount: number
   score?: { active: boolean; id: number }[]
   videos?: {

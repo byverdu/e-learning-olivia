@@ -1,4 +1,4 @@
-import { ContextState } from './store.types'
+import { ContextState, SearchResult } from './store.types'
 
 export const gameInitReducer = (
   state: ContextState,
@@ -68,6 +68,21 @@ export const playVideoReducer = (
   })
 }
 
+export const videoSelectedReducer = (
+  state: ContextState,
+  payload: string,
+): ContextState => {
+  const resultsCopy = [...state.searchResult]
+  const selectedVideo = state.searchResult.findIndex(video => video.videoId === payload)
+  resultsCopy[selectedVideo].selected = !resultsCopy[selectedVideo].selected
+
+  resultsCopy.splice(selectedVideo, 1, resultsCopy[selectedVideo])
+  return ({
+    ...state,
+    searchResult: resultsCopy,
+  })
+}
+
 export const showLoaderReducer = (
   state: ContextState,
   payload: string,
@@ -88,4 +103,12 @@ export const hideLoaderReducer = (
     active: false,
     text: 'Loading...',
   },
+})
+
+export const searchResolvedReducer = (
+  state: ContextState,
+  payload: SearchResult[],
+): ContextState => ({
+  ...state,
+  searchResult: payload,
 })

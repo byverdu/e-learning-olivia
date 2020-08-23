@@ -1,12 +1,14 @@
-import { ContextState, Actions } from './store.types'
+import { ContextState, Actions, SearchResult } from './store.types'
 import {
   gameInitReducer,
   gameResetReducer,
   gameInCreaseReducer,
   fetchVideosReducer,
   playVideoReducer,
+  videoSelectedReducer,
   showLoaderReducer,
   hideLoaderReducer,
+  searchResolvedReducer,
   // getVideoPlayerReducer,
 } from './reducerActions'
 
@@ -31,11 +33,17 @@ const reducer = (
     case 'video-play-list':
       return playVideoReducer(state)
 
+    case 'video-selected':
+      return videoSelectedReducer(state, payload as string)
+
     case 'loader-show':
       return showLoaderReducer(state, payload as string)
 
     case 'loader-hide':
       return hideLoaderReducer(state)
+
+    case 'search-resolved':
+      return searchResolvedReducer(state, payload as SearchResult[])
 
       // case 'video-get-player':
       //   return getVideoPlayerReducer(state, payload)

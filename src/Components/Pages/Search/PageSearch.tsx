@@ -3,9 +3,11 @@ import YouTubeSearch from 'Components/Atoms/YouTubeSearch';
 import { AppContext, Actions } from 'Store'
 
 import { getYouTubeSearchResults } from 'utils'
+import SearchResult from 'Components/Molecules/SearchResult';
 
 const PageSearch: FunctionComponent = () => {
   const {
+    state: { searchResult },
     dispatch,
   } = useContext(AppContext)
   const fetchYoutube = useCallback(async value => {
@@ -13,7 +15,7 @@ const PageSearch: FunctionComponent = () => {
 
     try {
       const videoSearch = await getYouTubeSearchResults(value)
-      dispatch(Actions.fetchVideos({ list: videoSearch, fetched: true }))
+      dispatch(Actions.searchResolved(videoSearch))
     } catch (e) {
       console.error(e.message)
     } finally {
@@ -23,6 +25,7 @@ const PageSearch: FunctionComponent = () => {
   return (
     <section>
       <YouTubeSearch onClickSearch={fetchYoutube} />
+      {searchResult.length > 0 && <SearchResult />}
     </section>
   )
 }

@@ -47,8 +47,9 @@ const fetchData = async (params: string): Promise<Observable<YoutubeResp>> =>
     )
 
 export const getYouTubeSearchResults = async (params: string): Promise<{
-  videoIid: string,
-  thumbnail: string
+  videoId: string,
+  thumbnail: string,
+  selected: boolean
 }[]> =>
   from(
     (await fetchData(params)).pipe(
@@ -60,8 +61,8 @@ export const getYouTubeSearchResults = async (params: string): Promise<{
           )
           .map(({
             id: { videoId },
-            snippet: { thumbnails: { high: { url: thumbnail } } },
-          }) => ({ videoId, thumbnail })),
+            snippet: { thumbnails: { medium: { url: thumbnail } } },
+          }) => ({ videoId, thumbnail, selected: false })),
       ),
       tap(console.log),
     ),
