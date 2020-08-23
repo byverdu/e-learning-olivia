@@ -107,6 +107,28 @@ export const videoPlaylistClearReducer = (
   }
 }
 
+export const videoRemoveItemPlayListReducer = (
+  state: ContextState,
+  payload: string,
+): ContextState => {
+  const searchResultItem = state.searchResult[payload]
+  const playList = {
+    ...state.playList,
+  }
+  delete playList[payload]
+  return {
+    ...state,
+    playList,
+    searchResult: {
+      ...state.searchResult,
+      [payload]: {
+        ...searchResultItem,
+        selected: false,
+      },
+    },
+  }
+}
+
 export const gameInitReducer = (
   state: ContextState,
   payload: unknown,

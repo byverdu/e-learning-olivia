@@ -31,8 +31,8 @@ export const videoSetPlayList = (): Actions =>
 export const videoClearPlayList = (): Actions =>
   actionCreators('video-clear-play-list')
 
-export const gameInit = (payload: number): Actions =>
-  actionCreators('game-init', payload)
+export const videoRemoveItemPlayList = (payload: string): Actions =>
+  actionCreators('video-remove-from-play-list', payload)
 
 export const gameReset = (): Actions => actionCreators('game-reset')
 

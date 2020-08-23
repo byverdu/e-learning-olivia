@@ -1,6 +1,14 @@
 import { Dispatch } from 'react'
 
 export type ActionsTypes =
+| 'loader-show'
+| 'loader-hide'
+| 'page-set-active'
+| 'search-resolved'
+| 'search-clear'
+| 'video-set-play-list'
+| 'video-clear-play-list'
+| 'video-remove-from-play-list'
   | 'game-init'
   | 'game-reset'
   | 'game-increase'

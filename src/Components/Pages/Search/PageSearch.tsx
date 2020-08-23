@@ -13,6 +13,11 @@ const PageSearch: FunctionComponent = () => {
   } = useContext(AppContext)
 
   const searchClearHandler = useCallback(() => dispatch(Actions.searchClear()), [dispatch])
+  const playlistClearHandler = useCallback(() => dispatch(Actions.videoClearPlayList()), [dispatch])
+  const playlistRemoveItemHandler = useCallback(
+    (videoId: string) => dispatch(Actions.videoRemoveItemPlayList(videoId)),
+    [dispatch],
+  )
 
   const fetchYoutube = useCallback(async value => {
     dispatch(Actions.showLoader('Searching videos'))
@@ -29,7 +34,12 @@ const PageSearch: FunctionComponent = () => {
 
   return (
     <section>
-      {Object.keys(playList).length > 0 && <PlayList />}
+      {Object.keys(playList).length > 0 && (
+      <PlayList
+        clearHandler={playlistClearHandler}
+        removeItemHandler={playlistRemoveItemHandler}
+      />
+      )}
       <YouTubeSearch onClickSearch={fetchYoutube} />
       <button
         type="button"
