@@ -15,7 +15,7 @@ const PageSearch: FunctionComponent = () => {
       const videoSearch = await getYouTubeSearchResults(value)
       dispatch(Actions.fetchVideos({ list: videoSearch, fetched: true }))
     } catch (e) {
-      dispatch(Actions.setErrorPage(e.message))
+      console.error(e.message)
     } finally {
       dispatch(Actions.hideLoader())
     }

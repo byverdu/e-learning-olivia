@@ -10,7 +10,7 @@ export type ActionsTypes =
   | 'loader-hide'
   | 'page-set-active'
 
-export type PagesType = 'main' | 'search' | 'error'
+export type PagesType = 'main' | 'search'
 
 export interface Actions {
   type: ActionsTypes

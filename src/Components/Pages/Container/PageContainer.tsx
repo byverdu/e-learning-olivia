@@ -5,7 +5,6 @@ import { PagesType } from 'Store/store.types';
 
 import Loader from 'Components/Atoms/Loader';
 import PageSearch from 'Components/Pages/Search';
-import ErrorPage from 'Components/Pages/Error';
 
 import styles from './pageContainer.scss'
 
@@ -19,7 +18,6 @@ const Temp = () => <div>Temp</div>
 const PageComponent:FunctionComponent<{page: PagesType}> = ({ page }) => {
   const components: {[key in PagesType]: FunctionComponent} = {
     search: PageSearch,
-    error: ErrorPage,
     main: Temp,
   }
   const ToRender = components[page]
