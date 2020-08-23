@@ -1,39 +1,27 @@
-import React from 'react'
-import { AppContext, Actions } from 'Store'
-import { getYouTubeSearchResults } from 'utils'
+import React, { FunctionComponent, useCallback } from 'react'
 
-const YouTubeSearch = () => {
+interface Props {
+  onClickSearch: (searchValue: string) => void
+}
+
+const YouTubeSearch: FunctionComponent<Props> = ({ onClickSearch }) => {
   const [value, setValue] = React.useState('')
-  const {
-    state,
-    dispatch,
-  } = React.useContext(AppContext)
+  const clickHandler = useCallback(() => {
+    onClickSearch(value)
+  }, [value, onClickSearch])
 
-  const fetchYoutube = React.useCallback(() => {
-    console.log(value)
-    getYouTubeSearchResults(value).then(resp =>
-      dispatch(Actions.fetchVideos({ list: resp, fetched: true })),
-    )
-  }, [dispatch, value])
-
-  console.log(state)
   return (
     <>
       <input
         onChange={e => setValue(e.target.value)}
         type="text"
+        autoComplete="true"
       />
       <button
         type="button"
-        onClick={fetchYoutube}
+        onClick={clickHandler}
       >
         Submit
-      </button>
-      <button
-        type="button"
-        onClick={() => dispatch(Actions.playVideo())}
-      >
-        Play video
       </button>
     </>
   )
