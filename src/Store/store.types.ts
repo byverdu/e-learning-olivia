@@ -5,6 +5,7 @@ export type ActionsTypes =
   | 'game-reset'
   | 'game-increase'
   | 'search-resolved'
+  | 'search-clear'
   | 'video-fetch-list'
   | 'video-play-list'
   | 'video-selected'

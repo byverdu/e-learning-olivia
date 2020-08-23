@@ -45,6 +45,9 @@ const reducer = (
     case 'search-resolved':
       return searchResolvedReducer(state, payload as SearchResult[])
 
+    case 'search-clear':
+      return searchClearReducer(state)
+
       // case 'video-get-player':
       //   return getVideoPlayerReducer(state, payload)
 

@@ -22,9 +22,16 @@ const PageSearch: FunctionComponent = () => {
       dispatch(Actions.hideLoader())
     }
   }, [dispatch])
+  const searchClearHandler = useCallback(() => dispatch(Actions.searchClear()), [dispatch])
   return (
     <section>
       <YouTubeSearch onClickSearch={fetchYoutube} />
+      <button
+        type="button"
+        onClick={searchClearHandler}
+      >
+        Clear Search
+      </button>
       {searchResult.length > 0 && <SearchResult />}
     </section>
   )

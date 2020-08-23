@@ -7,6 +7,24 @@ const actionCreators = (
   payload?: unknown,
 ): Actions => ({ type, payload })
 
+export const showLoader = (payload?: string): Actions =>
+  actionCreators('loader-show', payload)
+
+export const hideLoader = (): Actions =>
+  actionCreators('loader-hide')
+
+export const setActivePage = (payload: PagesType): Actions =>
+  actionCreators('page-set-active', payload)
+
+export const searchResolved = (payload: SearchResult[]): Actions =>
+  actionCreators('search-resolved', payload)
+
+export const searchClear = (): Actions =>
+  actionCreators('search-clear')
+
+export const videoSelected = (payload: string): Actions =>
+  actionCreators('video-selected', payload)
+
 export const gameInit = (payload: number): Actions =>
   actionCreators('game-init', payload)
 

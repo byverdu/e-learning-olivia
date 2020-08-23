@@ -83,6 +83,13 @@ export const videoSelectedReducer = (
   })
 }
 
+export const searchClearReducer = (
+  state: ContextState,
+): ContextState => ({
+  ...state,
+  searchResult: [],
+})
+
 export const showLoaderReducer = (
   state: ContextState,
   payload: string,
