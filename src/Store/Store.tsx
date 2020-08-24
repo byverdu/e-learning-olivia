@@ -26,7 +26,7 @@ const Store: FunctionComponent<Props> = ({ children, player }) => {
     },
     activePage: 'search',
     searchResult: {},
-    playList: {},
+    playlist: {},
     scoreCount: 0,
     score: [],
     videos: {

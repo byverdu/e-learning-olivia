@@ -4,18 +4,18 @@ import { AppContext, Actions } from 'Store'
 
 import { getYouTubeSearchResults } from 'utils'
 import SearchResult from 'Components/Molecules/SearchResult';
-import PlayList from 'Components/Molecules/PlayList';
+import Playlist from 'Components/Molecules/Playlist';
 
 const PageSearch: FunctionComponent = () => {
   const {
-    state: { searchResult, playList },
+    state: { searchResult, playlist },
     dispatch,
   } = useContext(AppContext)
 
   const searchClearHandler = useCallback(() => dispatch(Actions.searchClear()), [dispatch])
-  const playlistClearHandler = useCallback(() => dispatch(Actions.videoClearPlayList()), [dispatch])
+  const playlistClearHandler = useCallback(() => dispatch(Actions.videoClearPlaylist()), [dispatch])
   const playlistRemoveItemHandler = useCallback(
-    (videoId: string) => dispatch(Actions.videoRemoveItemPlayList(videoId)),
+    (videoId: string) => dispatch(Actions.videoRemoveItemPlaylist(videoId)),
     [dispatch],
   )
 
@@ -34,11 +34,11 @@ const PageSearch: FunctionComponent = () => {
 
   return (
     <section>
-      {Object.keys(playList).length > 0 && (
-      <PlayList
-        clearHandler={playlistClearHandler}
-        removeItemHandler={playlistRemoveItemHandler}
-      />
+      {Object.keys(playlist).length > 0 && (
+        <Playlist
+          clearHandler={playlistClearHandler}
+          removeItemHandler={playlistRemoveItemHandler}
+        />
       )}
       <YouTubeSearch onClickSearch={fetchYoutube} />
       <button

@@ -10,9 +10,9 @@ import {
   hideLoaderReducer,
   searchResolvedReducer,
   searchClearReducer,
-  videoSetPlayListReducer,
+  videoSetPlaylistReducer,
   videoPlaylistClearReducer,
-  videoRemoveItemPlayListReducer,
+  videoRemoveItemPlaylistReducer,
 } from './reducerActions'
 
 const reducer = (
@@ -45,19 +45,19 @@ const reducer = (
     case 'search-clear':
       return searchClearReducer(state)
 
-    case 'video-set-play-list':
-      return videoSetPlayListReducer(state)
+    case 'video-set-playlist':
+      return videoSetPlaylistReducer(state)
 
-    case 'video-clear-play-list':
+    case 'video-clear-playlist':
       return videoPlaylistClearReducer(state)
 
-    case 'video-remove-from-play-list':
-      return videoRemoveItemPlayListReducer(state, payload as string)
+    case 'video-remove-from-playlist':
+      return videoRemoveItemPlaylistReducer(state, payload as string)
 
       // case 'video-fetch-list':
       //   return fetchVideosReducer(state, payload)
 
-      // case 'video-play-list':
+      // case 'video-playlist':
       //   return playVideoReducer(state)
 
       // case 'video-get-player':

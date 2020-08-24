@@ -6,12 +6,13 @@ export type ActionsTypes =
 | 'page-set-active'
 | 'search-resolved'
 | 'search-clear'
-| 'video-set-play-list'
-| 'video-clear-play-list'
-| 'video-remove-from-play-list'
-  | 'game-init'
-  | 'game-reset'
-  | 'game-increase'
+| 'video-set-playlist'
+| 'video-clear-playlist'
+| 'video-remove-from-playlist'
+| 'video-ready-playlist'
+| 'game-init'
+| 'game-reset'
+| 'game-increase'
   | 'search-resolved'
   | 'search-clear'
   | 'video-fetch-list'
@@ -48,7 +49,7 @@ export interface ContextState {
     text?: string
   },
   searchResult: {[key: string]: SearchResult}
-  playList: {[key: string]: VideoItem}
+  playlist: {[key: string]: VideoItem}
   scoreCount: number
   score?: { active: boolean; id: number }[]
   videos?: {

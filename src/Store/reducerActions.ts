@@ -5,12 +5,12 @@ export const searchResolvedReducer = (
   payload: SearchResult[],
 ): ContextState => {
   const payloadCopy = payload.slice()
-  Object.keys(state.playList)
+  Object.keys(state.playlist)
     .forEach(videoId => {
-      const indexInPlayList = payloadCopy.findIndex(result => result.videoId === videoId)
+      const indexInPlaylist = payloadCopy.findIndex(result => result.videoId === videoId)
 
-      if (indexInPlayList !== -1) {
-        payloadCopy[indexInPlayList].selected = true
+      if (indexInPlaylist !== -1) {
+        payloadCopy[indexInPlaylist].selected = true
       }
     })
 
@@ -69,12 +69,12 @@ export const videoSelectedReducer = (
   })
 }
 
-export const videoSetPlayListReducer = (
+export const videoSetPlaylistReducer = (
   state: ContextState,
 ): ContextState => {
-  const playList: {[key: string]: VideoItem} = Object.values(state.searchResult)
+  const playlist: {[key: string]: VideoItem} = Object.values(state.searchResult)
     .filter((item: SearchResult) => item.selected)
-    .reduce((prev, curr: SearchResult) => ({
+    .reduce((prev: {[key: string]: VideoItem}, curr: SearchResult) => ({
       ...prev,
       [curr.videoId]: {
         videoId: curr.videoId,
@@ -84,7 +84,10 @@ export const videoSetPlayListReducer = (
 
   return {
     ...state,
-    playList,
+    playlist: {
+      ...state.playlist,
+      ...playlist,
+    },
   }
 }
 
@@ -102,23 +105,23 @@ export const videoPlaylistClearReducer = (
 
   return {
     ...state,
-    playList: {},
+    playlist: {},
     searchResult,
   }
 }
 
-export const videoRemoveItemPlayListReducer = (
+export const videoRemoveItemPlaylistReducer = (
   state: ContextState,
   payload: string,
 ): ContextState => {
   const searchResultItem = state.searchResult[payload]
-  const playList = {
-    ...state.playList,
+  const playlist = {
+    ...state.playlist,
   }
-  delete playList[payload]
+  delete playlist[payload]
   return {
     ...state,
-    playList,
+    playlist,
     searchResult: {
       ...state.searchResult,
       [payload]: {

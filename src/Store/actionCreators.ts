@@ -25,14 +25,17 @@ export const searchClear = (): Actions =>
 export const videoSelected = (payload: string): Actions =>
   actionCreators('video-selected', payload)
 
-export const videoSetPlayList = (): Actions =>
-  actionCreators('video-set-play-list')
+export const videoSetPlaylist = (): Actions =>
+  actionCreators('video-set-playlist')
 
-export const videoClearPlayList = (): Actions =>
-  actionCreators('video-clear-play-list')
+export const videoClearPlaylist = (): Actions =>
+  actionCreators('video-clear-playlist')
 
-export const videoRemoveItemPlayList = (payload: string): Actions =>
-  actionCreators('video-remove-from-play-list', payload)
+export const videoRemoveItemPlaylist = (payload: string): Actions =>
+  actionCreators('video-remove-from-playlist', payload)
+
+export const gameInit = (payload: number): Actions =>
+  actionCreators('game-init', payload)
 
 export const gameReset = (): Actions => actionCreators('game-reset')
 
@@ -43,7 +46,7 @@ export const fetchVideos = (payload: ContextState['videos']): Actions =>
   actionCreators('video-fetch-list', payload)
 
 export const playVideo = (): Actions =>
-  actionCreators('video-play-list')
+  actionCreators('video-playlist')
 
 // export const getVideoPlayer = (payload: unknown): Actions =>
 //   actionCreators('video-get-player', payload)
