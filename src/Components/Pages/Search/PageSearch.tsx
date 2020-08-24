@@ -1,4 +1,6 @@
-import React, { FunctionComponent, useContext, useCallback } from 'react';
+import React, {
+  FunctionComponent, useContext, useCallback, useMemo,
+} from 'react';
 import YouTubeSearch from 'Components/Atoms/YouTubeSearch';
 import { AppContext, Actions } from 'Store'
 
@@ -18,6 +20,8 @@ const PageSearch: FunctionComponent = () => {
     (videoId: string) => dispatch(Actions.videoRemoveItemPlaylist(videoId)),
     [dispatch],
   )
+  const hasPlaylist = useMemo(() => Object.keys(playlist).length > 0, [playlist])
+  const hasSearchResults = useMemo(() => Object.keys(searchResult).length > 0, [searchResult])
 
   const fetchYoutube = useCallback(async value => {
     dispatch(Actions.showLoader('Searching videos'))
@@ -34,25 +38,27 @@ const PageSearch: FunctionComponent = () => {
 
   return (
     <section>
-      {Object.keys(playlist).length > 0 && (
+      {hasPlaylist && (
         <Playlist
           removeItemHandler={playlistRemoveItemHandler}
         />
       )}
       <YouTubeSearch onClickSearch={fetchYoutube} />
       <button
+        disabled={!hasSearchResults}
         type="button"
         onClick={searchClearHandler}
       >
         Clear Search
       </button>
       <button
+        disabled={!hasPlaylist}
         type="button"
         onClick={playlistClearHandler}
       >
         Clear Playlist
       </button>
-      {Object.keys(searchResult).length > 0 && <SearchResult />}
+      {hasSearchResults && <SearchResult />}
     </section>
   )
 }
