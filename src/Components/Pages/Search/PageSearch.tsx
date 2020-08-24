@@ -25,6 +25,7 @@ const PageSearch: FunctionComponent = () => {
       const videoIds = Array.from(document.querySelectorAll('div[data-playlist]'))
         .map((item: HTMLDivElement) => item.dataset.id)
       dispatch(Actions.videoReadyPlaylist(videoIds))
+      dispatch(Actions.setActivePage('game-selector'))
     },
     [dispatch],
   )

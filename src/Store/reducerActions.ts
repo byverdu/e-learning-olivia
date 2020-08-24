@@ -1,4 +1,35 @@
-import { ContextState, SearchResult, VideoItem } from './store.types'
+import {
+  ContextState, SearchResult, VideoItem, PagesType,
+} from './store.types'
+
+export const showLoaderReducer = (
+  state: ContextState,
+  payload: string,
+): ContextState => ({
+  ...state,
+  loader: {
+    active: true,
+    text: payload,
+  },
+})
+
+export const hideLoaderReducer = (
+  state: ContextState,
+): ContextState => ({
+  ...state,
+  loader: {
+    active: false,
+    text: 'Loading...',
+  },
+})
+
+export const pageSelectorReducer = (
+  state: ContextState,
+  payload: PagesType,
+): ContextState => ({
+  ...state,
+  activePage: payload,
+})
 
 export const searchResolvedReducer = (
   state: ContextState,
@@ -28,27 +59,6 @@ export const searchClearReducer = (
 ): ContextState => ({
   ...state,
   searchResult: {},
-})
-
-export const showLoaderReducer = (
-  state: ContextState,
-  payload: string,
-): ContextState => ({
-  ...state,
-  loader: {
-    active: true,
-    text: payload,
-  },
-})
-
-export const hideLoaderReducer = (
-  state: ContextState,
-): ContextState => ({
-  ...state,
-  loader: {
-    active: false,
-    text: 'Loading...',
-  },
 })
 
 export const videoSelectedReducer = (
@@ -207,55 +217,3 @@ export const playVideoReducer = (
     },
   })
 }
-
-export const videoSelectedReducer = (
-  state: ContextState,
-  payload: string,
-): ContextState => {
-  const selectedVideo = state.searchResult[payload]
-  selectedVideo.selected = !selectedVideo.selected
-
-  return ({
-    ...state,
-  })
-}
-
-export const searchClearReducer = (
-  state: ContextState,
-): ContextState => ({
-  ...state,
-  searchResult: {},
-})
-
-export const showLoaderReducer = (
-  state: ContextState,
-  payload: string,
-): ContextState => ({
-  ...state,
-  loader: {
-    active: true,
-    text: payload,
-  },
-})
-
-export const hideLoaderReducer = (
-  state: ContextState,
-  payload: unknown,
-): ContextState => ({
-  ...state,
-  loader: {
-    active: false,
-    text: 'Loading...',
-  },
-})
-
-export const searchResolvedReducer = (
-  state: ContextState,
-  payload: SearchResult[],
-): ContextState => ({
-  ...state,
-  searchResult: payload.reduce((prev, curr) => ({
-    ...prev,
-    [curr.videoId]: curr,
-  }), {}),
-})

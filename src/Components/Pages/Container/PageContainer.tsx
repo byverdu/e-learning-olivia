@@ -5,12 +5,14 @@ import { PagesType } from 'Store/store.types';
 
 import Loader from 'Components/Atoms/Loader';
 import PageSearch from 'Components/Pages/Search';
+import GameSelector from 'Components/Pages/GameSelector';
 
 import styles from './pageContainer.scss'
 
 const pageTitles = new Map<PagesType, string>([
   ['main', 'Select Your Game Type'],
   ['search', 'Search Videos on Youtube'],
+  ['game-selector', 'Select Your Game type'],
 ])
 
 const Temp = () => <div>Temp</div>
@@ -18,6 +20,7 @@ const Temp = () => <div>Temp</div>
 const PageComponent:FunctionComponent<{page: PagesType}> = ({ page }) => {
   const components: {[key in PagesType]: FunctionComponent} = {
     search: PageSearch,
+    'game-selector': GameSelector,
     main: Temp,
   }
   const ToRender = components[page]

@@ -24,7 +24,7 @@ export type ActionsTypes =
   | 'loader-hide'
   | 'page-set-active'
 
-export type PagesType = 'main' | 'search'
+export type PagesType = 'main' | 'search' | 'game-selector'
 
 export interface Actions {
   type: ActionsTypes

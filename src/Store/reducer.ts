@@ -1,4 +1,6 @@
-import { ContextState, Actions, SearchResult } from './store.types'
+import {
+  ContextState, Actions, SearchResult, PagesType,
+} from './store.types'
 import {
   gameInitReducer,
   gameResetReducer,
@@ -14,6 +16,7 @@ import {
   videoPlaylistClearReducer,
   videoRemoveItemPlaylistReducer,
   videoReadyPlaylistReducer,
+  pageSelectorReducer,
 } from './reducerActions'
 
 const reducer = (
@@ -22,6 +25,15 @@ const reducer = (
 ): ContextState => {
   const { type, payload } = action
   switch (type) {
+    case 'loader-show':
+      return showLoaderReducer(state, payload as string)
+
+    case 'loader-hide':
+      return hideLoaderReducer(state)
+
+    case 'page-set-active':
+      return pageSelectorReducer(state, payload as PagesType)
+
     case 'game-init':
       return gameInitReducer(state, payload)
 
@@ -33,12 +45,6 @@ const reducer = (
 
     case 'video-selected':
       return videoSelectedReducer(state, payload as string)
-
-    case 'loader-show':
-      return showLoaderReducer(state, payload as string)
-
-    case 'loader-hide':
-      return hideLoaderReducer(state)
 
     case 'search-resolved':
       return searchResolvedReducer(state, payload as SearchResult[])
