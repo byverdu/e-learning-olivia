@@ -132,6 +132,14 @@ export const videoRemoveItemPlaylistReducer = (
   }
 }
 
+export const videoReadyPlaylistReducer = (
+  state: ContextState,
+  payload: string[],
+): ContextState => ({
+  ...state,
+  videos: payload,
+})
+
 export const gameInitReducer = (
   state: ContextState,
   payload: unknown,

@@ -23,6 +23,8 @@ const Playlist: FunctionComponent<Props> = ({ removeItemHandler }) => {
     >
       {Object.values(playlist).map(({ videoId, thumbnail }) => (
         <div
+          data-id={videoId}
+          data-playlist
           draggable
           onDragStart={(ev: DragEvent) => {
             const elem = ev.currentTarget as HTMLDivElement

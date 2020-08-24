@@ -52,10 +52,7 @@ export interface ContextState {
   playlist: {[key: string]: VideoItem}
   scoreCount: number
   score?: { active: boolean; id: number }[]
-  videos?: {
-    fetched: boolean
-    list: string[]
-  }
+  videos?: string[]
   playback: {
     src: string
     track: number

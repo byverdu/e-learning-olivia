@@ -10,7 +10,7 @@ import Playlist from 'Components/Molecules/Playlist';
 
 const PageSearch: FunctionComponent = () => {
   const {
-    state: { searchResult, playlist },
+    state: { searchResult, playlist, videos },
     dispatch,
   } = useContext(AppContext)
 
@@ -18,6 +18,14 @@ const PageSearch: FunctionComponent = () => {
   const playlistClearHandler = useCallback(() => dispatch(Actions.videoClearPlaylist()), [dispatch])
   const playlistRemoveItemHandler = useCallback(
     (videoId: string) => dispatch(Actions.videoRemoveItemPlaylist(videoId)),
+    [dispatch],
+  )
+  const playlistReadyHandler = useCallback(
+    () => {
+      const videoIds = Array.from(document.querySelectorAll('div[data-playlist]'))
+        .map((item: HTMLDivElement) => item.dataset.id)
+      dispatch(Actions.videoReadyPlaylist(videoIds))
+    },
     [dispatch],
   )
   const hasPlaylist = useMemo(() => Object.keys(playlist).length > 0, [playlist])
@@ -35,6 +43,8 @@ const PageSearch: FunctionComponent = () => {
       dispatch(Actions.hideLoader())
     }
   }, [dispatch])
+
+  console.log(videos)
 
   return (
     <section>
@@ -57,6 +67,13 @@ const PageSearch: FunctionComponent = () => {
         onClick={playlistClearHandler}
       >
         Clear Playlist
+      </button>
+      <button
+        disabled={!hasPlaylist}
+        type="button"
+        onClick={playlistReadyHandler}
+      >
+        Done!
       </button>
       {hasSearchResults && <SearchResult />}
     </section>

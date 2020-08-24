@@ -13,6 +13,7 @@ import {
   videoSetPlaylistReducer,
   videoPlaylistClearReducer,
   videoRemoveItemPlaylistReducer,
+  videoReadyPlaylistReducer,
 } from './reducerActions'
 
 const reducer = (
@@ -53,6 +54,9 @@ const reducer = (
 
     case 'video-remove-from-playlist':
       return videoRemoveItemPlaylistReducer(state, payload as string)
+
+    case 'video-ready-playlist':
+      return videoReadyPlaylistReducer(state, payload as string[])
 
       // case 'video-fetch-list':
       //   return fetchVideosReducer(state, payload)

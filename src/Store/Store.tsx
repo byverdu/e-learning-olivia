@@ -29,10 +29,7 @@ const Store: FunctionComponent<Props> = ({ children, player }) => {
     playlist: {},
     scoreCount: 0,
     score: [],
-    videos: {
-      list: [],
-      fetched: false,
-    },
+    videos: [],
     playback: {
       src: '',
       track: 0,
