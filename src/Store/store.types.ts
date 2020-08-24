@@ -25,7 +25,7 @@ export type ActionsTypes =
   | 'loader-hide'
   | 'page-set-active'
 
-export type PagesType = 'main' | 'search' | 'game-selector'
+export type PagesType = 'search' | 'game-selector' | 'game'
 
 export type GameType = 'letters' | 'numbers' | 'letters-numbers' | 'maths'
 

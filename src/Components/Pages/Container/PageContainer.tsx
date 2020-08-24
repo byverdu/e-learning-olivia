@@ -10,7 +10,7 @@ import GameSelector from 'Components/Pages/GameSelector';
 import styles from './pageContainer.scss'
 
 const pageTitles = new Map<PagesType, string>([
-  ['main', 'Select Your Game Type'],
+  ['game', 'Let\'s Play!'],
   ['search', 'Search Videos on Youtube'],
   ['game-selector', 'Select Your Game type'],
 ])
@@ -21,7 +21,7 @@ const PageComponent:FunctionComponent<{page: PagesType}> = ({ page }) => {
   const components: {[key in PagesType]: FunctionComponent} = {
     search: PageSearch,
     'game-selector': GameSelector,
-    main: Temp,
+    game: Temp,
   }
   const ToRender = components[page]
 
