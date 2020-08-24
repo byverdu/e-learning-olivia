@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useContext, useCallback, SyntheticEvent,
+  FunctionComponent, useContext, useCallback, SyntheticEvent, DragEvent, useState,
 } from 'react'
 import { AppContext } from 'Store'
 
@@ -10,20 +10,39 @@ interface Props {
   removeItemHandler: (videoId: string) => void
 }
 
-const PlayList: FunctionComponent<Props> = ({ clearHandler, removeItemHandler }) => {
-  const { state: { playList } } = useContext(AppContext)
+const Playlist: FunctionComponent<Props> = ({ clearHandler, removeItemHandler }) => {
+  const { state: { playlist } } = useContext(AppContext)
 
   const removeHandler = useCallback((e: SyntheticEvent) => {
     removeItemHandler((e.target as HTMLButtonElement).dataset.id)
   }, [removeItemHandler])
+  const [dragged, setDragged] = useState<HTMLDivElement>(undefined)
 
   return (
-    <section className={styles.playlist}>
-      {Object.values(playList).map(({ videoId, thumbnail }) => (
+    <section
+      className={styles.playlist}
+    >
+      {Object.values(playlist).map(({ videoId, thumbnail }) => (
         <div
+          draggable
+          onDragStart={(ev: DragEvent) => {
+            const elem = ev.currentTarget as HTMLDivElement
+            setDragged(elem)
+            elem.classList.add(styles['drag-start'])
+          }}
+          onDragOver={(ev: DragEvent) => {
+            const elem = (ev.currentTarget as HTMLDivElement)
+            ev.preventDefault();
+            elem.insertAdjacentElement('beforebegin', dragged);
+          }}
+          onDragEnd={(ev: DragEvent) => {
+            (ev.currentTarget as HTMLDivElement).classList.remove(styles['drag-start'])
+          }}
+          className={styles['playlist-item']}
           key={videoId}
         >
           <button
+            className={styles['clear-btn']}
             data-id={videoId}
             type="button"
             onClick={removeHandler}
@@ -47,4 +66,4 @@ const PlayList: FunctionComponent<Props> = ({ clearHandler, removeItemHandler })
   )
 }
 
-export default PlayList
+export default Playlist
