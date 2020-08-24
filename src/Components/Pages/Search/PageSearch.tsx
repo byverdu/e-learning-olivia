@@ -36,7 +36,6 @@ const PageSearch: FunctionComponent = () => {
     <section>
       {Object.keys(playlist).length > 0 && (
         <Playlist
-          clearHandler={playlistClearHandler}
           removeItemHandler={playlistRemoveItemHandler}
         />
       )}
@@ -46,6 +45,12 @@ const PageSearch: FunctionComponent = () => {
         onClick={searchClearHandler}
       >
         Clear Search
+      </button>
+      <button
+        type="button"
+        onClick={playlistClearHandler}
+      >
+        Clear Playlist
       </button>
       {Object.keys(searchResult).length > 0 && <SearchResult />}
     </section>

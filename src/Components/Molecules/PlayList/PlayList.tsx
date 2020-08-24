@@ -6,11 +6,10 @@ import { AppContext } from 'Store'
 import styles from './playlist.scss'
 
 interface Props {
-  clearHandler: () => void
   removeItemHandler: (videoId: string) => void
 }
 
-const Playlist: FunctionComponent<Props> = ({ clearHandler, removeItemHandler }) => {
+const Playlist: FunctionComponent<Props> = ({ removeItemHandler }) => {
   const { state: { playlist } } = useContext(AppContext)
 
   const removeHandler = useCallback((e: SyntheticEvent) => {
@@ -56,12 +55,6 @@ const Playlist: FunctionComponent<Props> = ({ clearHandler, removeItemHandler })
         </div>
       ),
       )}
-      <button
-        type="button"
-        onClick={clearHandler}
-      >
-        Clear Playlist
-      </button>
     </section>
   )
 }
