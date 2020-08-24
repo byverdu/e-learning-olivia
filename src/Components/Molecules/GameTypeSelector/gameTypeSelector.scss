@@ -1,0 +1,16 @@
+@import "../../../App/globals";
+
+.game-selector {
+  .game-btn {
+    border: 1px solid;
+    border-radius: 5px;
+    box-shadow: 1px 1px 2px;
+    cursor: pointer;
+    margin: 5px;
+    padding: 15px;
+
+    &.selected {
+      background: $goldie;
+    }
+  }
+}

@@ -9,6 +9,7 @@
 
     &-item {
       align-items: center;
+      cursor: pointer;
       display: flex;
       justify-content: space-around;
       width: 60px;
@@ -20,7 +21,7 @@
     width: 30px;
 
     &.selected {
-      color: $goldy;
+      color: $goldie;
       stroke: #000;
     }
   }

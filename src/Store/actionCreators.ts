@@ -1,5 +1,5 @@
 import {
-  Actions, ActionsTypes, ContextState, PagesType, SearchResult,
+  Actions, ActionsTypes, ContextState, PagesType, SearchResult, GameType,
 } from './store.types'
 
 const actionCreators = (
@@ -39,6 +39,9 @@ export const videoReadyPlaylist = (payload: string[]): Actions =>
 
 export const gameCountSelect = (payload: number): Actions =>
   actionCreators('game-count-select', payload)
+
+export const gameTypeSelect = (payload: GameType): Actions =>
+  actionCreators('game-type-select', payload)
 
 export const gameReset = (): Actions => actionCreators('game-reset')
 

@@ -11,6 +11,7 @@ export type ActionsTypes =
 | 'video-remove-from-playlist'
 | 'video-ready-playlist'
 | 'game-count-select'
+| 'game-type-select'
 | 'game-reset'
 | 'game-increase'
   | 'search-resolved'
@@ -25,6 +26,8 @@ export type ActionsTypes =
   | 'page-set-active'
 
 export type PagesType = 'main' | 'search' | 'game-selector'
+
+export type GameType = 'letters' | 'numbers' | 'letters-numbers' | 'maths'
 
 export interface Actions {
   type: ActionsTypes
@@ -51,6 +54,7 @@ export interface ContextState {
   searchResult: {[key: string]: SearchResult}
   playlist: {[key: string]: VideoItem}
   gameScoreLength: number
+  gameType: GameType
   score?: { active: boolean; id: number }[]
   videos?: string[]
   playback: {

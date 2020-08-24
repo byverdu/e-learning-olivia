@@ -28,6 +28,7 @@ const Store: FunctionComponent<Props> = ({ children, player }) => {
     searchResult: {},
     playlist: {},
     gameScoreLength: 0,
+    gameType: 'letters',
     score: [],
     videos: [],
     playback: {

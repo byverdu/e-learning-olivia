@@ -1,5 +1,5 @@
 import {
-  ContextState, SearchResult, VideoItem, PagesType,
+  ContextState, SearchResult, VideoItem, PagesType, GameType,
 } from './store.types'
 
 export const showLoaderReducer = (
@@ -166,6 +166,14 @@ export const gameCountSelectReducer = (
     score,
   }
 }
+
+export const gameTypeSelectReducer = (
+  state: ContextState,
+  payload: GameType,
+): ContextState => ({
+  ...state,
+  gameType: payload,
+})
 
 export const gameResetReducer = (
   state: ContextState,
