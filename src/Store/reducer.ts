@@ -2,7 +2,7 @@ import {
   ContextState, Actions, SearchResult, PagesType,
 } from './store.types'
 import {
-  gameInitReducer,
+  gameCountSelectReducer,
   gameResetReducer,
   gameInCreaseReducer,
   // fetchVideosReducer,
@@ -34,8 +34,8 @@ const reducer = (
     case 'page-set-active':
       return pageSelectorReducer(state, payload as PagesType)
 
-    case 'game-init':
-      return gameInitReducer(state, payload)
+    case 'game-count-select':
+      return gameCountSelectReducer(state, payload as number)
 
     case 'game-reset':
       return gameResetReducer(state)

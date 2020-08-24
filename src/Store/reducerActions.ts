@@ -150,11 +150,11 @@ export const videoReadyPlaylistReducer = (
   videos: payload,
 })
 
-export const gameInitReducer = (
+export const gameCountSelectReducer = (
   state: ContextState,
-  payload: unknown,
+  payload: number,
 ): ContextState => {
-  const length = payload as number
+  const length = payload
   const score = Array.from({ length }, (_, index) => ({
     id: index,
     active: false,
@@ -162,6 +162,7 @@ export const gameInitReducer = (
 
   return {
     ...state,
+    gameScoreLength: length,
     score,
   }
 }

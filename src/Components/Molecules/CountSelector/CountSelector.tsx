@@ -11,11 +11,11 @@ import styles from './countSelector.scss'
 
 const CountSelector: FunctionComponent = () => {
   const options = [3, 5, 8, 10]
-  const { dispatch, state: { scoreCount } } = useContext(AppContext)
+  const { dispatch, state: { gameScoreLength } } = useContext(AppContext)
   const selectOptions = useCallback(
     (e: React.SyntheticEvent) => {
       const payload = (e.currentTarget as HTMLElement).dataset.id
-      dispatch(Actions.gameInit(Number(payload)))
+      dispatch(Actions.gameCountSelect(Number(payload)))
     },
     [dispatch],
   )
@@ -34,7 +34,7 @@ const CountSelector: FunctionComponent = () => {
             {' '}
             <Icon
               name="star"
-              className={classNames(styles['icon-star'], { [styles.selected]: scoreCount === item })}
+              className={classNames(styles['icon-star'], { [styles.selected]: gameScoreLength === item })}
             />
           </li>
         ))}

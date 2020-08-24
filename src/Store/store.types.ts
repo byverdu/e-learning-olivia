@@ -10,7 +10,7 @@ export type ActionsTypes =
 | 'video-clear-playlist'
 | 'video-remove-from-playlist'
 | 'video-ready-playlist'
-| 'game-init'
+| 'game-count-select'
 | 'game-reset'
 | 'game-increase'
   | 'search-resolved'
@@ -50,7 +50,7 @@ export interface ContextState {
   },
   searchResult: {[key: string]: SearchResult}
   playlist: {[key: string]: VideoItem}
-  scoreCount: number
+  gameScoreLength: number
   score?: { active: boolean; id: number }[]
   videos?: string[]
   playback: {
