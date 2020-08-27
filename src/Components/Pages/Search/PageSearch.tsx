@@ -20,15 +20,6 @@ const PageSearch: FunctionComponent = () => {
     (videoId: string) => dispatch(Actions.videoRemoveItemPlaylist(videoId)),
     [dispatch],
   )
-  const playlistReadyHandler = useCallback(
-    () => {
-      const videoIds = Array.from(document.querySelectorAll('div[data-playlist]'))
-        .map((item: HTMLDivElement) => item.dataset.id)
-      dispatch(Actions.videoReadyPlaylist(videoIds))
-      dispatch(Actions.setActivePage('game-selector'))
-    },
-    [dispatch],
-  )
   const hasPlaylist = useMemo(() => Object.keys(playlist).length > 0, [playlist])
   const hasSearchResults = useMemo(() => Object.keys(searchResult).length > 0, [searchResult])
 
@@ -44,8 +35,6 @@ const PageSearch: FunctionComponent = () => {
       dispatch(Actions.hideLoader())
     }
   }, [dispatch])
-
-  console.log(videos)
 
   return (
     <section>
@@ -68,13 +57,6 @@ const PageSearch: FunctionComponent = () => {
         onClick={playlistClearHandler}
       >
         Clear Playlist
-      </button>
-      <button
-        disabled={!hasPlaylist}
-        type="button"
-        onClick={playlistReadyHandler}
-      >
-        Done!
       </button>
       {hasSearchResults && <SearchResult />}
     </section>

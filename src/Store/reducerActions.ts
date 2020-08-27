@@ -117,6 +117,7 @@ export const videoPlaylistClearReducer = (
     ...state,
     playlist: {},
     searchResult,
+    videos: [],
   }
 }
 
@@ -147,7 +148,7 @@ export const videoReadyPlaylistReducer = (
   payload: string[],
 ): ContextState => ({
   ...state,
-  videos: payload,
+  videos: payload.length === 1 ? [...state.videos, ...payload] : payload,
 })
 
 export const gameCountSelectReducer = (

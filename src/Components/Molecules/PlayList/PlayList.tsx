@@ -1,7 +1,7 @@
 import React, {
   FunctionComponent, useContext, useCallback, SyntheticEvent, DragEvent, useState,
 } from 'react'
-import { AppContext } from 'Store'
+import { AppContext, Actions } from 'Store'
 
 import styles from './playlist.scss'
 
@@ -10,7 +10,7 @@ interface Props {
 }
 
 const Playlist: FunctionComponent<Props> = ({ removeItemHandler }) => {
-  const { state: { playlist } } = useContext(AppContext)
+  const { state: { playlist }, dispatch } = useContext(AppContext)
 
   const removeHandler = useCallback((e: SyntheticEvent) => {
     removeItemHandler((e.target as HTMLButtonElement).dataset.id)
@@ -38,6 +38,9 @@ const Playlist: FunctionComponent<Props> = ({ removeItemHandler }) => {
           }}
           onDragEnd={(ev: DragEvent) => {
             (ev.currentTarget as HTMLDivElement).classList.remove(styles['drag-start'])
+            const videoIds = Array.from(document.querySelectorAll('div[data-playlist]'))
+              .map((item: HTMLDivElement) => item.dataset.id)
+            dispatch(Actions.videoReadyPlaylist(videoIds))
           }}
           className={styles['playlist-item']}
           key={videoId}
