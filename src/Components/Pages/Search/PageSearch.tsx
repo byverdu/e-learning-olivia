@@ -10,7 +10,7 @@ import Playlist from 'Components/Molecules/Playlist';
 
 const PageSearch: FunctionComponent = () => {
   const {
-    state: { searchResult, playlist, videos },
+    state: { searchResult, playlist },
     dispatch,
   } = useContext(AppContext)
 
@@ -20,6 +20,11 @@ const PageSearch: FunctionComponent = () => {
     (videoId: string) => dispatch(Actions.videoRemoveItemPlaylist(videoId)),
     [dispatch],
   )
+  const setVideoPlayLisHandler = useCallback((videoId: string) => {
+    dispatch(Actions.videoSelected(videoId))
+    dispatch(Actions.videoReadyPlaylist([videoId]))
+    dispatch(Actions.videoSetPlaylist())
+  }, [dispatch])
   const hasPlaylist = useMemo(() => Object.keys(playlist).length > 0, [playlist])
   const hasSearchResults = useMemo(() => Object.keys(searchResult).length > 0, [searchResult])
 
@@ -58,7 +63,12 @@ const PageSearch: FunctionComponent = () => {
       >
         Clear Playlist
       </button>
-      {hasSearchResults && <SearchResult />}
+      {hasSearchResults && (
+      <SearchResult
+        searchResult={searchResult}
+        setVideoPlayLis={setVideoPlayLisHandler}
+      />
+      )}
     </section>
   )
 }

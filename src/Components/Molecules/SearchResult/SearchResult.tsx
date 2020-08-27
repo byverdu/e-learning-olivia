@@ -1,33 +1,28 @@
-import React, {
-  FunctionComponent, useContext, useCallback,
-} from 'react'
-import { AppContext, Actions } from 'Store'
+import React, { FunctionComponent } from 'react'
+import { AppState } from 'Store/store.types'
 
 import SearchCard from 'Components/Atoms/SearchCard'
 
 import styles from './searchResult.scss'
 
-const SearchResult: FunctionComponent = () => {
-  const { state: { searchResult }, dispatch } = useContext(AppContext)
-  const clickCardHandler = useCallback((videoId: string) => {
-    dispatch(Actions.videoSelected(videoId))
-    dispatch(Actions.videoReadyPlaylist([videoId]))
-    dispatch(Actions.videoSetPlaylist())
-  }, [dispatch])
+interface Props {
+  setVideoPlayLis: (videoId: string) => void,
+  searchResult: AppState['state']['searchResult']
+}
 
-  return (
+const SearchResult: FunctionComponent<Props> = ({ setVideoPlayLis, searchResult }) =>
+  (
     <section className={styles['search-result']}>
       {Object.values(searchResult).map(({ videoId, thumbnail, selected }) => (
         <SearchCard
           key={videoId}
           selected={selected}
-          onCardClick={clickCardHandler}
+          onCardClick={setVideoPlayLis}
           videoId={videoId}
           thumbnail={thumbnail}
         />
       ))}
     </section>
   )
-}
 
 export default SearchResult
