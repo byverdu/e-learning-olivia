@@ -4,6 +4,7 @@ import { AppContext } from 'Store'
 import { PagesType } from 'Store/store.types';
 
 import Loader from 'Components/Atoms/Loader';
+import PageSelector from 'Components/Molecules/PageSelector';
 import PageSearch from 'Components/Pages/Search';
 import GameSelector from 'Components/Pages/GameSelector';
 
@@ -47,6 +48,7 @@ const PageContainer: FunctionComponent = ({
         : (
           <section className={styles.container}>
             <h1 className={styles.title}>{title}</h1>
+            <PageSelector />
             <PageComponent page={activePage} />
             {children}
           </section>
