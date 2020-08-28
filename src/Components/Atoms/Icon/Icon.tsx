@@ -5,8 +5,7 @@ import React, {
   Suspense,
   useRef,
 } from 'react'
-
-export type SvgIcons = 'star'
+import { SvgIcons } from './icons.types'
 
 interface Props {
   className?: string
