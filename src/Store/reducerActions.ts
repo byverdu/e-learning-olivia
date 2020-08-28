@@ -163,7 +163,7 @@ export const gameCountSelectReducer = (
 
   return {
     ...state,
-    gameScoreLength: length,
+    gameLength: length,
     score,
   }
 }

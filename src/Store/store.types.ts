@@ -53,7 +53,7 @@ export interface ContextState {
   },
   searchResult: {[key: string]: SearchResult}
   playlist: {[key: string]: VideoItem}
-  gameScoreLength: number
+  gameLength: number
   gameType: GameType
   score?: { active: boolean; id: number }[]
   videos?: string[]

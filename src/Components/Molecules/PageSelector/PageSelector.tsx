@@ -21,7 +21,7 @@ const emptyCollection = (
 const PageSelector: FunctionComponent = () => {
   const {
     state: {
-      playlist, searchResult, gameScoreLength, activePage,
+      playlist, searchResult, gameLength, activePage,
     }, dispatch,
   } = useContext(AppContext)
 
@@ -64,7 +64,7 @@ const PageSelector: FunctionComponent = () => {
           return true
         }
 
-        if (gameScoreLength === 0) {
+        if (gameLength === 0) {
           return true
         }
 
@@ -72,7 +72,7 @@ const PageSelector: FunctionComponent = () => {
       })(),
       onClick: clickHandler,
     },
-  ], [activePage, clickHandler, searchPageDone, gameScoreLength])
+  ], [activePage, clickHandler, searchPageDone, gameLength])
 
   return (
     <section>
