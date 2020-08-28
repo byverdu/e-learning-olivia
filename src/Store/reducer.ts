@@ -6,6 +6,7 @@ import {
   gameTypeSelectReducer,
   gameResetReducer,
   gameInCreaseReducer,
+  gameTypeShuffleReducer,
   // fetchVideosReducer,
   // playVideoReducer,
   videoSelectedReducer,
@@ -40,6 +41,9 @@ const reducer = (
 
     case 'game-type-select':
       return gameTypeSelectReducer(state, payload as GameType)
+
+    case 'game-type-shuffle':
+      return gameTypeShuffleReducer(state, payload as boolean)
 
     case 'game-reset':
       return gameResetReducer(state)

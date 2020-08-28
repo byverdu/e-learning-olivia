@@ -4,7 +4,7 @@ import React, {
   useReducer,
   useEffect,
 } from 'react'
-import { Actions } from 'Store'
+import { defaultNumbersGame } from 'utils'
 import { ContextState, AppState } from './store.types'
 import reducer from './reducer'
 import withScriptLoader from '../HOC'
@@ -27,8 +27,12 @@ const Store: FunctionComponent<Props> = ({ children, player }) => {
     activePage: 'search',
     searchResult: {},
     playlist: {},
-    gameLength: 0,
-    gameType: 'letters',
+    games: {
+      letters: [],
+      numbers: [...defaultNumbersGame],
+      'letters-numbers': [20, 'a'],
+      maths: [],
+    },
     score: [],
     videos: [],
     playback: {

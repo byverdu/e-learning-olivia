@@ -12,6 +12,7 @@ export type ActionsTypes =
 | 'video-ready-playlist'
 | 'game-count-select'
 | 'game-type-select'
+| 'game-type-shuffle'
 | 'game-reset'
 | 'game-increase'
   | 'search-resolved'
@@ -55,6 +56,12 @@ export interface ContextState {
   playlist: {[key: string]: VideoItem}
   gameLength: number
   gameType: GameType
+  games: {
+    'letters': string[]
+    'numbers': number[]
+    ['letters-numbers']: (string|number)[]
+    'maths': number[]
+  }
   score?: { active: boolean; id: number }[]
   videos?: string[]
   playback: {

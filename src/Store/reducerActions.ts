@@ -1,3 +1,4 @@
+import { arrayShuffle, defaultNumbersGame } from 'utils'
 import {
   ContextState, SearchResult, VideoItem, PagesType, GameType,
 } from './store.types'
@@ -173,6 +174,19 @@ export const gameTypeSelectReducer = (
 ): ContextState => ({
   ...state,
   gameType: payload,
+})
+
+export const gameTypeShuffleReducer = (
+  state: ContextState,
+  payload: boolean,
+): ContextState => ({
+  ...state,
+  games: {
+    ...state.games,
+    [state.gameType]: payload
+      ? arrayShuffle(state.games[state.gameType])
+      : [...defaultNumbersGame],
+  },
 })
 
 export const gameResetReducer = (

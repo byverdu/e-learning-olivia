@@ -43,6 +43,9 @@ export const gameCountSelect = (payload: number): Actions =>
 export const gameTypeSelect = (payload: GameType): Actions =>
   actionCreators('game-type-select', payload)
 
+export const gameTypeShuffle = (payload: boolean): Actions =>
+  actionCreators('game-type-shuffle', payload)
+
 export const gameReset = (): Actions => actionCreators('game-reset')
 
 export const gameIncrease = (): Actions =>

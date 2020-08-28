@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useCallback, useContext, SyntheticEvent,
+  FunctionComponent, useCallback, useContext, SyntheticEvent, useState,
 } from 'react'
 import CountSelector from 'Components/Molecules/CountSelector'
 import GameTypeSelector from 'Components/Molecules/GameTypeSelector'
@@ -14,7 +14,8 @@ const gameTypes = new Map<GameType, string>([
 ])
 
 const PageGameSelector: FunctionComponent = () => {
-  const { dispatch, state: { gameLength, gameType } } = useContext(AppContext)
+  const [shuffledItems, setShuffledItems] = useState(false)
+  const { dispatch, state: { gameLength, gameType, games } } = useContext(AppContext)
   const selectOptionHandler = useCallback(
     (e: React.SyntheticEvent) => {
       const payload = (e.currentTarget as HTMLElement).dataset.id
@@ -25,6 +26,13 @@ const PageGameSelector: FunctionComponent = () => {
     const gameName = (e.target as HTMLButtonElement).dataset.id
     dispatch(Actions.gameTypeSelect(gameName as GameType))
   }, [dispatch])
+  const setShuffledItemsHandler = useCallback(() => {
+    const newValue = !shuffledItems
+    setShuffledItems(newValue)
+    dispatch(Actions.gameTypeShuffle(newValue))
+  }, [setShuffledItems, shuffledItems, dispatch])
+
+  console.log(games.numbers)
 
   return (
     <section>
@@ -34,6 +42,8 @@ const PageGameSelector: FunctionComponent = () => {
         gameLengthOptions={[3, 5, 8, 10]}
       />
       <GameTypeSelector
+        setShuffledItemsHandler={setShuffledItemsHandler}
+        shuffledItems={shuffledItems}
         selectGameTypeHandler={selectGameTypeHandler}
         gameType={gameType}
         gameTypes={gameTypes}
