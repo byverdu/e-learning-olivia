@@ -95,7 +95,6 @@ export const videoSetPlaylistReducer = (
   return {
     ...state,
     playlist: {
-      ...state.playlist,
       ...playlist,
     },
   }
