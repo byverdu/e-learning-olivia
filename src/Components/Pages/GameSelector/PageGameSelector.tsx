@@ -25,6 +25,7 @@ const PageGameSelector: FunctionComponent = () => {
   const selectGameTypeHandler = useCallback((e: SyntheticEvent) => {
     const gameName = (e.target as HTMLButtonElement).dataset.id
     dispatch(Actions.gameTypeSelect(gameName as GameType))
+    setShuffledItems(false)
   }, [dispatch])
   const setShuffledItemsHandler = useCallback(() => {
     const newValue = !shuffledItems

@@ -2,9 +2,7 @@ import React, {
   createContext,
   FunctionComponent,
   useReducer,
-  useEffect,
 } from 'react'
-import { defaultNumbersGame } from 'utils'
 import { ContextState, AppState } from './store.types'
 import reducer from './reducer'
 import withScriptLoader from '../HOC'
@@ -29,8 +27,8 @@ const Store: FunctionComponent<Props> = ({ children, player }) => {
     playlist: {},
     games: {
       letters: [],
-      numbers: [...defaultNumbersGame],
-      'letters-numbers': [20, 'a'],
+      numbers: [],
+      'letters-numbers': [],
       maths: [],
     },
     score: [],
