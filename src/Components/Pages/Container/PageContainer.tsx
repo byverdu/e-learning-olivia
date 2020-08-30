@@ -7,6 +7,7 @@ import Loader from 'Components/Atoms/Loader';
 import PageSelector from 'Components/Molecules/PageSelector';
 import PageSearch from 'Components/Pages/Search';
 import GameSelector from 'Components/Pages/GameSelector';
+import Game from 'Components/Pages/Game';
 
 import styles from './pageContainer.scss'
 
@@ -16,13 +17,11 @@ const pageTitles = new Map<PagesType, string>([
   ['game-selector', 'Select Your Game type'],
 ])
 
-const Temp = () => <div>Temp</div>
-
 const PageComponent:FunctionComponent<{page: PagesType}> = ({ page }) => {
   const components: {[key in PagesType]: FunctionComponent} = {
     search: PageSearch,
     'game-selector': GameSelector,
-    game: Temp,
+    game: Game,
   }
   const ToRender = components[page]
 
