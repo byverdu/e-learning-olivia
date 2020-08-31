@@ -230,6 +230,18 @@ export const fetchVideosReducer = (
   videos: payload as ContextState['videos'],
 })
 
+export const videoSetNextReducer = (
+  state: ContextState,
+): ContextState => {
+  const { videos, currentTrack } = state
+  const videosLength = videos.length - 1
+  const nextTrack = currentTrack === videosLength ? 0 : currentTrack + 1
+  return {
+    ...state,
+    currentTrack: nextTrack,
+  }
+}
+
 export const playVideoReducer = (
   state: ContextState,
 ): ContextState => {

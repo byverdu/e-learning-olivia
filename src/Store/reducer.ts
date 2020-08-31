@@ -18,6 +18,7 @@ import {
   videoPlaylistClearReducer,
   videoRemoveItemPlaylistReducer,
   videoReadyPlaylistReducer,
+  videoSetNextReducer,
   pageSelectorReducer,
 } from './reducerActions'
 
@@ -71,6 +72,9 @@ const reducer = (
 
     case 'video-ready-playlist':
       return videoReadyPlaylistReducer(state, payload as string[])
+
+    case 'video-set-next':
+      return videoSetNextReducer(state)
 
       // case 'video-fetch-list':
       //   return fetchVideosReducer(state, payload)

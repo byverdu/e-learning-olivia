@@ -10,6 +10,7 @@ export type ActionsTypes =
 | 'video-clear-playlist'
 | 'video-remove-from-playlist'
 | 'video-ready-playlist'
+| 'video-set-next'
 | 'game-count-select'
 | 'game-type-select'
 | 'game-type-shuffle'
@@ -63,6 +64,7 @@ export interface ContextState {
     'maths': number[]
   }
   score?: { active: boolean; id: number }[]
+  currentTrack: number
   videos?: string[]
   playback: {
     src: string

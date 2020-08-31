@@ -21,6 +21,7 @@ const Playlist: FunctionComponent<Props> = ({ removeItemHandler }) => {
     <section
       className={styles.playlist}
     >
+      {/* TODO create a list card */}
       {Object.values(playlist).map(({ videoId, thumbnail }) => (
         <div
           data-id={videoId}

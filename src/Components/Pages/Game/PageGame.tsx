@@ -55,6 +55,13 @@ const PageGame: FunctionComponent = () => {
     dispatch(Actions.gameCountSelect(5))
   }, [dispatch])
 
+  useEffect(() => {
+    const fullScore = score.every((item, index) => index >= 0 && item.active)
+    if (score.length === gameLength && fullScore) {
+      dispatch(Actions.setActivePage('video'))
+    }
+  }, [score, dispatch, gameLength])
+
   console.log(gameLength, score)
   return (
     <>

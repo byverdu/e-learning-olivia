@@ -51,6 +51,9 @@ export const gameReset = (): Actions => actionCreators('game-reset')
 export const gameIncrease = (): Actions =>
   actionCreators('game-increase')
 
+export const videoSetNext = (): Actions =>
+  actionCreators('video-set-next')
+
 export const fetchVideos = (payload: ContextState['videos']): Actions =>
   actionCreators('video-fetch-list', payload)
 
