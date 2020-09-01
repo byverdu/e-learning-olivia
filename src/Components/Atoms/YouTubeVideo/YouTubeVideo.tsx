@@ -2,25 +2,40 @@
 import React, { Component } from 'react'
 import { AppContext, Actions } from 'Store'
 
-type Props = Record<string, unknown>
-type State = null
-type Context = typeof AppContext
+interface Props {
+  currentTrack: number
+}
+interface State {
+  currentTrack: number
+}type Context = typeof AppContext
 
 export default class YouTubeVideo extends Component<Props, State, Context> {
   static contextType = AppContext
+
+  static getDerivedStateFromProps(nextProps: Props, prevState: State) {
+    if (nextProps.currentTrack !== prevState.currentTrack) {
+      return { currentTrack: nextProps.currentTrack };
+    }
+    return null
+  }
 
   context: React.ContextType<typeof AppContext>
 
   player: YT.Player
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props)
+
+    this.state = {
+      currentTrack: props.currentTrack,
+    }
 
     this.onPlayerStateChange = this.onPlayerStateChange.bind(this)
   }
 
   componentDidMount() {
-    const { state: { player, videos, currentTrack } } = this.context
+    const { state: { player, videos } } = this.context
+    const { currentTrack } = this.state
 
     if (player) {
       this.player = new player.Player('player', {
@@ -35,6 +50,19 @@ export default class YouTubeVideo extends Component<Props, State, Context> {
         },
       })
     }
+  }
+
+  componentDidUpdate(prevProps: Props) {
+    const { state: { videos } } = this.context
+    const { currentTrack } = this.state
+
+    if (currentTrack !== prevProps.currentTrack) {
+      this.player.loadVideoById(videos[currentTrack])
+    }
+  }
+
+  componentWillUnmount() {
+    this.player.destroy()
   }
 
   onPlayerStateChange(e: YT.OnStateChangeEvent) {
