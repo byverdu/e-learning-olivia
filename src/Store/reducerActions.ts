@@ -242,6 +242,20 @@ export const videoSetNextReducer = (
   }
 }
 
+export const videoPlaySelectedReducer = (
+  state: ContextState,
+  payload: string,
+): ContextState => {
+  const { videos } = state
+  const indexNextVideo = videos.findIndex(videoId => videoId === payload)
+
+  const nextTrack = indexNextVideo === -1 ? 0 : indexNextVideo
+  return {
+    ...state,
+    currentTrack: nextTrack,
+  }
+}
+
 export const playVideoReducer = (
   state: ContextState,
 ): ContextState => {

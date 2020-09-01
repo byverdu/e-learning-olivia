@@ -25,6 +25,9 @@ export const searchClear = (): Actions =>
 export const videoSelected = (payload: string): Actions =>
   actionCreators('video-selected', payload)
 
+export const videoPlaySelected = (payload: string): Actions =>
+  actionCreators('video-play-selected', payload)
+
 export const videoSetPlaylist = (): Actions =>
   actionCreators('video-set-playlist')
 

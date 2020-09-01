@@ -20,6 +20,7 @@ import {
   videoReadyPlaylistReducer,
   videoSetNextReducer,
   pageSelectorReducer,
+  videoPlaySelectedReducer,
 } from './reducerActions'
 
 const reducer = (
@@ -75,6 +76,9 @@ const reducer = (
 
     case 'video-set-next':
       return videoSetNextReducer(state)
+
+    case 'video-play-selected':
+      return videoPlaySelectedReducer(state, payload as string)
 
       // case 'video-fetch-list':
       //   return fetchVideosReducer(state, payload)

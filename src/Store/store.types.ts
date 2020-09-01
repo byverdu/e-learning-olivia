@@ -11,6 +11,8 @@ export type ActionsTypes =
 | 'video-remove-from-playlist'
 | 'video-ready-playlist'
 | 'video-set-next'
+| 'video-selected'
+| 'video-play-selected'
 | 'game-count-select'
 | 'game-type-select'
 | 'game-type-shuffle'
