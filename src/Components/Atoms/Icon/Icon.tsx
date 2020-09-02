@@ -29,10 +29,16 @@ export const Icon: FunctionComponent<Props> = ({
   const [isLoading, setLoading] = useState<boolean>(true)
   const iconRef = useRef()
   useEffect(() => {
+    let mounted = true
     fetchIcon(name).then(resp => {
-      iconRef.current = resp
-      setLoading(false)
+      if (mounted) {
+        iconRef.current = resp
+        setLoading(false)
+      }
     })
+
+    // eslint-disable-next-line no-return-assign
+    return () => mounted = false
   }, [name])
 
   const { current: LazyIcon } = iconRef || undefined

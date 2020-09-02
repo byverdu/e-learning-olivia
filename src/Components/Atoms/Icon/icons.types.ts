@@ -1,4 +1,5 @@
-const icons = ['apple',
+export const iconsList = [
+  'apple',
   'arrow',
   'bananas',
   'bathtub',
@@ -22,7 +23,6 @@ const icons = ['apple',
   'monkey',
   'motorbike',
   'nest',
-  'netflix',
   'octopus',
   'orange',
   'pasta',
@@ -51,4 +51,4 @@ const icons = ['apple',
   'zero',
 ] as const;
 
-export type SvgIcons = typeof icons[number]
+export type SvgIcons = typeof iconsList[number]
