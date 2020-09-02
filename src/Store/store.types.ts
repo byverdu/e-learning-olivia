@@ -67,6 +67,7 @@ export interface ContextState {
   }
   score?: { active: boolean; id: number }[]
   currentTrack: number
+  currentCard: number
   videos?: string[]
   playback: {
     src: string

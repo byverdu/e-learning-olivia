@@ -256,6 +256,20 @@ export const videoPlaySelectedReducer = (
   }
 }
 
+export const cardNextReducer = (
+  state: ContextState,
+): ContextState => {
+  const { games, gameType } = state
+  let { currentCard } = state
+  const gameLength = (games[gameType].length - 1)
+  const nextCard = currentCard === gameLength ? 0 : currentCard += 1
+
+  return {
+    ...state,
+    currentCard: nextCard,
+  }
+}
+
 export const playVideoReducer = (
   state: ContextState,
 ): ContextState => {

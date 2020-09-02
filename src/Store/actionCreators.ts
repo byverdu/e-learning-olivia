@@ -57,11 +57,5 @@ export const gameIncrease = (): Actions =>
 export const videoSetNext = (): Actions =>
   actionCreators('video-set-next')
 
-export const fetchVideos = (payload: ContextState['videos']): Actions =>
-  actionCreators('video-fetch-list', payload)
-
-export const playVideo = (): Actions =>
-  actionCreators('video-playlist')
-
-// export const getVideoPlayer = (payload: unknown): Actions =>
-//   actionCreators('video-get-player', payload)
+export const cardNext = (): Actions =>
+  actionCreators('card-next')

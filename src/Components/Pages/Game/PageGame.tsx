@@ -6,6 +6,8 @@ import { AppContext, Actions } from 'Store'
 import Scoreboard from 'Components/Molecules/Scoreboard'
 import GameCard from 'Components/Atoms/GameCard'
 
+import styles from './pageGame.scss'
+
 const NUMBER_0_KEY_CODE = 47
 const LETTER_Z_KEY_CODE = 91
 
@@ -16,7 +18,7 @@ const validateTwoDigitsNumbers = ((e: KeyboardEvent) => {
 
   if (value.charAt(0) === e.key) {
     target.setAttribute('id', e.key)
-  } else if (`${target.id}${value.charAt(1)}` === value) {
+  } else if (`${target.id}${e.key}` === value) {
     isValid = true
   }
 
@@ -26,9 +28,10 @@ const validateTwoDigitsNumbers = ((e: KeyboardEvent) => {
 const PageGame: FunctionComponent = () => {
   const {
     state: {
-      gameType, games, gameLength, score,
+      gameType, games, gameLength, score, currentCard,
     }, dispatch,
   } = useContext(AppContext)
+  const card = games[gameType][currentCard]
   const keyupHandler = useCallback((e: KeyboardEvent) => {
     const target = e.target as HTMLElement
     const { value } = target.dataset
@@ -38,7 +41,7 @@ const PageGame: FunctionComponent = () => {
     let isValid = false
 
     if (e.keyCode > NUMBER_0_KEY_CODE && e.keyCode < LETTER_Z_KEY_CODE) {
-      if (_gameType === 'numbers' && hasTwoDigits) {
+      if (_gameType.includes('numbers') && hasTwoDigits) {
         isValid = validateTwoDigitsNumbers(e)
       } else if (e.key === `${value}`) {
         isValid = true
@@ -46,13 +49,14 @@ const PageGame: FunctionComponent = () => {
 
       if (isValid) {
         dispatch(Actions.gameIncrease())
+        dispatch(Actions.cardNext())
       }
       console.log(e.key, e.keyCode, isValid ? 'yeiii' : 'nope')
     }
   }, [dispatch])
   useEffect(() => {
     // TODO remove once dev is done
-    dispatch(Actions.gameCountSelect(5))
+    dispatch(Actions.gameCountSelect(10))
   }, [dispatch])
 
   useEffect(() => {
@@ -67,20 +71,13 @@ const PageGame: FunctionComponent = () => {
     <>
       <Scoreboard />
       <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-        }}
+        className={styles['page-game']}
         data-game-type={gameType}
       >
-        {games[gameType].map((item: string) => (
-          <GameCard
-            key={item}
-            value={item}
-            gameType={gameType}
-            keyupHandler={keyupHandler}
-          />
-        ))}
+        <GameCard
+          value={card}
+          keyupHandler={keyupHandler}
+        />
       </div>
     </>
   )
