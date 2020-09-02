@@ -7,8 +7,6 @@ import {
   gameResetReducer,
   gameInCreaseReducer,
   gameTypeShuffleReducer,
-  // fetchVideosReducer,
-  // playVideoReducer,
   videoSelectedReducer,
   showLoaderReducer,
   hideLoaderReducer,

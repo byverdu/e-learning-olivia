@@ -1,5 +1,5 @@
 import {
-  Actions, ActionsTypes, ContextState, PagesType, SearchResult, GameType,
+  Actions, ActionsTypes, PagesType, SearchResult, GameType,
 } from './store.types'
 
 const actionCreators = (

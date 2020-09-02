@@ -13,23 +13,15 @@ export type ActionsTypes =
 | 'video-set-next'
 | 'video-selected'
 | 'video-play-selected'
+| 'video-fetch-list'
 | 'game-count-select'
 | 'game-type-select'
 | 'game-type-shuffle'
 | 'game-reset'
 | 'game-increase'
-  | 'search-resolved'
-  | 'search-clear'
-  | 'video-fetch-list'
-  | 'video-set-play-list'
-  | 'video-clear-play-list'
-  | 'video-play-list'
-  | 'video-selected'
-  | 'loader-show'
-  | 'loader-hide'
-  | 'page-set-active'
+| 'card-next'
 
-export type PagesType = 'search' | 'game-selector' | 'game'
+export type PagesType = 'search' | 'game-selector' | 'game' | 'video'
 
 export type GameType = 'letters' | 'numbers' | 'letters-numbers' | 'maths'
 
@@ -69,11 +61,6 @@ export interface ContextState {
   currentTrack: number
   currentCard: number
   videos?: string[]
-  playback: {
-    src: string
-    track: number
-    isPlaying: boolean
-  }
   player: typeof YT
 }
 

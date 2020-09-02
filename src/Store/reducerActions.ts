@@ -222,14 +222,6 @@ export const gameInCreaseReducer = (
   }
 }
 
-export const fetchVideosReducer = (
-  state: ContextState,
-  payload: unknown,
-): ContextState => ({
-  ...state,
-  videos: payload as ContextState['videos'],
-})
-
 export const videoSetNextReducer = (
   state: ContextState,
 ): ContextState => {
@@ -268,19 +260,4 @@ export const cardNextReducer = (
     ...state,
     currentCard: nextCard,
   }
-}
-
-export const playVideoReducer = (
-  state: ContextState,
-): ContextState => {
-  const currentVideo = state.playback.track
-  const src = state.videos.list[currentVideo]
-  return ({
-    ...state,
-    playback: {
-      track: currentVideo + 1,
-      src,
-      isPlaying: true,
-    },
-  })
 }
