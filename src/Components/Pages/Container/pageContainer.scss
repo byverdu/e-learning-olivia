@@ -2,10 +2,14 @@
 
 .container {
   color: #fff;
+  margin: 0 auto;
+  max-width: 1200px;
 
   .title {
     font-family: $font-header;
-    font-size: 50px;
+    font-size: 60px;
     font-weight: 100;
+    text-align: center;
+    text-shadow: 1px 4px 4px #000;
   }
 }
