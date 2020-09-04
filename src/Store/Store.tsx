@@ -3,6 +3,7 @@ import React, {
   FunctionComponent,
   useReducer,
 } from 'react'
+import { getDefaultValues } from 'utils'
 import { ContextState, AppState } from './store.types'
 import reducer from './reducer'
 import withScriptLoader from '../HOC'
@@ -12,7 +13,7 @@ export const AppContext = createContext<AppState | undefined>(
 )
 
 interface Props {
-  player: string
+  player: typeof YT
 }
 
 // eslint-disable-next-line react/prop-types
@@ -24,30 +25,23 @@ const Store: FunctionComponent<Props> = ({ children, player }) => {
     },
     activePage: 'search',
     searchResult: {},
+    gameLength: 0,
+    gameType: 'letters-numbers',
     playlist: {},
     games: {
-      letters: [],
-      numbers: [],
-      'letters-numbers': [],
+      letters: [...getDefaultValues('letters') as string[]],
+      numbers: [...getDefaultValues('numbers') as number[]],
+      'letters-numbers': [...getDefaultValues('letters-numbers')],
       maths: [],
     },
     score: [],
+    currentTrack: 0,
+    currentCard: 0,
     videos: [],
-    playback: {
-      src: '',
-      track: 0,
-      isPlaying: false,
-    },
-    player: undefined,
+    player,
   }
 
   const [state, dispatch] = useReducer(reducer, initialState)
-
-  useEffect(() => {
-    if (player) {
-      dispatch(Actions.getVideoPlayer(player))
-    }
-  }, [player])
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>
