@@ -16,7 +16,7 @@ const validateTwoDigitsNumbers = ((e: KeyboardEvent) => {
   const { value } = target.dataset
   let isValid = false
 
-  if (value.charAt(0) === e.key) {
+  if (value.charAt(0) === e.key && target.id !== e.key) {
     target.setAttribute('id', e.key)
   } else if (`${target.id}${e.key}` === value) {
     isValid = true
@@ -54,10 +54,6 @@ const PageGame: FunctionComponent = () => {
       console.log(e.key, e.keyCode, isValid ? 'yeiii' : 'nope')
     }
   }, [dispatch])
-  useEffect(() => {
-    // TODO remove once dev is done
-    dispatch(Actions.gameCountSelect(10))
-  }, [dispatch])
 
   useEffect(() => {
     const fullScore = score.every((item, index) => index >= 0 && item.active)
@@ -66,7 +62,6 @@ const PageGame: FunctionComponent = () => {
     }
   }, [score, dispatch, gameLength])
 
-  console.log(gameLength, score)
   return (
     <>
       <Scoreboard />
