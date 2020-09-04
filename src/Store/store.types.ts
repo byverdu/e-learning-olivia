@@ -7,6 +7,7 @@ export type ActionsTypes =
 | 'search-resolved'
 | 'search-clear'
 | 'video-set-playlist'
+| 'video-set-saved-playlist'
 | 'video-clear-playlist'
 | 'video-remove-from-playlist'
 | 'video-ready-playlist'
@@ -41,6 +42,10 @@ export interface VideoItem {
   thumbnail: string
 }
 
+export interface PlayList {
+  [key: string]: VideoItem
+}
+
 export interface ContextState {
   activePage: PagesType
   loader: {
@@ -48,7 +53,7 @@ export interface ContextState {
     text?: string
   },
   searchResult: {[key: string]: SearchResult}
-  playlist: {[key: string]: VideoItem}
+  playlist: PlayList
   gameLength: number
   gameType: GameType
   games: {

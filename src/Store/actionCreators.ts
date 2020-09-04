@@ -1,5 +1,5 @@
 import {
-  Actions, ActionsTypes, PagesType, SearchResult, GameType,
+  Actions, ActionsTypes, PagesType, SearchResult, GameType, PlayList,
 } from './store.types'
 
 const actionCreators = (
@@ -30,6 +30,9 @@ export const videoPlaySelected = (payload: string): Actions =>
 
 export const videoSetPlaylist = (): Actions =>
   actionCreators('video-set-playlist')
+
+export const videoSetSavedPlaylist = (payload: PlayList): Actions =>
+  actionCreators('video-set-saved-playlist', payload)
 
 export const videoClearPlaylist = (): Actions =>
   actionCreators('video-clear-playlist')

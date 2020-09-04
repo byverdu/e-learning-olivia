@@ -1,6 +1,6 @@
 import { arrayShuffle, getDefaultValues } from 'utils'
 import {
-  ContextState, SearchResult, VideoItem, PagesType, GameType,
+  ContextState, SearchResult, PagesType, GameType, PlayList,
 } from './store.types'
 
 export const showLoaderReducer = (
@@ -83,9 +83,9 @@ export const videoSelectedReducer = (
 export const videoSetPlaylistReducer = (
   state: ContextState,
 ): ContextState => {
-  const playlist: {[key: string]: VideoItem} = Object.values(state.searchResult)
+  const playlist: PlayList = Object.values(state.searchResult)
     .filter((item: SearchResult) => item.selected)
-    .reduce((prev: {[key: string]: VideoItem}, curr: SearchResult) => ({
+    .reduce((prev: PlayList, curr: SearchResult) => ({
       ...prev,
       [curr.videoId]: {
         videoId: curr.videoId,
@@ -100,6 +100,16 @@ export const videoSetPlaylistReducer = (
     },
   }
 }
+
+export const videoSetSavedPlaylistReducer = (
+  state: ContextState,
+  payload: PlayList,
+): ContextState => ({
+  ...state,
+  playlist: {
+    ...payload,
+  },
+})
 
 export const videoPlaylistClearReducer = (
   state: ContextState,

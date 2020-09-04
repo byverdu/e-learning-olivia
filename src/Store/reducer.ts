@@ -1,5 +1,5 @@
 import {
-  ContextState, Actions, SearchResult, PagesType, GameType,
+  ContextState, Actions, SearchResult, PagesType, GameType, PlayList,
 } from './store.types'
 import {
   gameCountSelectReducer,
@@ -15,6 +15,7 @@ import {
   videoSetPlaylistReducer,
   videoPlaylistClearReducer,
   videoRemoveItemPlaylistReducer,
+  videoSetSavedPlaylistReducer,
   videoReadyPlaylistReducer,
   videoSetNextReducer,
   pageSelectorReducer,
@@ -63,6 +64,9 @@ const reducer = (
 
     case 'video-set-playlist':
       return videoSetPlaylistReducer(state)
+
+    case 'video-set-saved-playlist':
+      return videoSetSavedPlaylistReducer(state, payload as PlayList)
 
     case 'video-clear-playlist':
       return videoPlaylistClearReducer(state)

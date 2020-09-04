@@ -28,14 +28,15 @@ const PageSelector: FunctionComponent = () => {
   const clickHandler = useCallback((e: SyntheticEvent) => {
     const currPage = (e.target as HTMLButtonElement).dataset.id
     dispatch(Actions.setActivePage(currPage as PagesType))
-  }, [dispatch])
+    localStorage.setItem('playList', JSON.stringify(playlist))
+  }, [dispatch, playlist])
   const searchPageDone = useCallback(() => {
-    if (emptyCollection(searchResult, 'equal')) {
-      return true
-    }
-
     if (emptyCollection(playlist, 'bigger')) {
       return false
+    }
+
+    if (emptyCollection(searchResult, 'equal')) {
+      return true
     }
 
     return true

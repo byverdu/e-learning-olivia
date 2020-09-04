@@ -1,6 +1,6 @@
-import React, { FunctionComponent, useContext } from 'react'
+import React, { FunctionComponent, useContext, useEffect } from 'react'
 
-import { AppContext } from 'Store'
+import { AppContext, Actions } from 'Store'
 import { PagesType } from 'Store/store.types';
 
 import Loader from 'Components/Atoms/Loader';
@@ -36,8 +36,16 @@ const PageComponent:FunctionComponent<{page: PagesType}> = ({ page }) => {
 const PageContainer: FunctionComponent = ({
   children,
 }) => {
-  const { state: { loader, activePage } } = useContext(AppContext)
+  const { state: { loader, activePage }, dispatch } = useContext(AppContext)
   const title = pageTitles.get(activePage)
+
+  useEffect(() => {
+    const playList = localStorage.getItem('playList')
+
+    if (playList) {
+      dispatch(Actions.videoSetSavedPlaylist(JSON.parse(playList)))
+    }
+  }, [dispatch])
 
   return (
     <>

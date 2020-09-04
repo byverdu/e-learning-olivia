@@ -15,7 +15,10 @@ const PageSearch: FunctionComponent = () => {
   } = useContext(AppContext)
 
   const searchClearHandler = useCallback(() => dispatch(Actions.searchClear()), [dispatch])
-  const playlistClearHandler = useCallback(() => dispatch(Actions.videoClearPlaylist()), [dispatch])
+  const playlistClearHandler = useCallback(() => {
+    dispatch(Actions.videoClearPlaylist())
+    localStorage.removeItem('playList')
+  }, [dispatch])
   const playlistRemoveItemHandler = useCallback(
     (videoId: string) => dispatch(Actions.videoRemoveItemPlaylist(videoId)),
     [dispatch],
