@@ -1,3 +1,28 @@
-.hidden {
-  display: none;
+@import "../../../App/globals";
+
+.count-selector {
+  .list {
+    align-items: center;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0;
+
+    &-item {
+      align-items: center;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-around;
+      width: 60px;
+    }
+  }
+
+  .icon-star {
+    height: 30px;
+    width: 30px;
+
+    &.selected {
+      color: $goldie;
+      stroke: #000;
+    }
+  }
 }

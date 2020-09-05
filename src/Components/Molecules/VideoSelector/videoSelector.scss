@@ -1,0 +1,41 @@
+.video-selector {
+  align-items: center;
+  display: flex;
+  height: 200px;
+
+  .container {
+    display: flex;
+    overflow-x: scroll;
+
+    .thumbnail {
+      height: 150px;
+      margin: 15px 5px;
+      width: 200px;
+    }
+  }
+
+  .navigation {
+    align-items: center;
+    display: flex;
+    height: 200px;
+
+    .item {
+      background: #fff;
+      border: 1px solid;
+      border-radius: 50%;
+      box-shadow: 1px 1px 2px #fff, -1px -1px 2px #fff;
+      color: #000;
+      padding: 10px 14px;
+      position: absolute;
+      z-index: 1;
+
+      &.left {
+        left: 0;
+      }
+
+      &.right {
+        right: 0;
+      }
+    }
+  }
+}

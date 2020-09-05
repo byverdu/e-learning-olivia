@@ -1,24 +1,30 @@
-import React, { FunctionComponent, useContext } from 'react'
+import React, { FunctionComponent, useContext, useEffect } from 'react'
 
-import { AppContext } from 'Store'
+import { AppContext, Actions } from 'Store'
 import { PagesType } from 'Store/store.types';
 
 import Loader from 'Components/Atoms/Loader';
+import PageSelector from 'Components/Molecules/PageSelector';
 import PageSearch from 'Components/Pages/Search';
+import GameSelector from 'Components/Pages/GameSelector';
+import Game from 'Components/Pages/Game';
 
 import styles from './pageContainer.scss'
+import PageVideo from '../Video';
 
 const pageTitles = new Map<PagesType, string>([
-  ['main', 'Select Your Game Type'],
   ['search', 'Search Videos on Youtube'],
+  ['game-selector', 'Select Your Game type'],
+  ['game', 'Let\'s Play!'],
+  ['video', 'Video Page'],
 ])
-
-const Temp = () => <div>Temp</div>
 
 const PageComponent:FunctionComponent<{page: PagesType}> = ({ page }) => {
   const components: {[key in PagesType]: FunctionComponent} = {
     search: PageSearch,
-    main: Temp,
+    'game-selector': GameSelector,
+    game: Game,
+    video: PageVideo,
   }
   const ToRender = components[page]
 
@@ -30,8 +36,16 @@ const PageComponent:FunctionComponent<{page: PagesType}> = ({ page }) => {
 const PageContainer: FunctionComponent = ({
   children,
 }) => {
-  const { state: { loader, activePage } } = useContext(AppContext)
+  const { state: { loader, activePage }, dispatch } = useContext(AppContext)
   const title = pageTitles.get(activePage)
+
+  useEffect(() => {
+    const playList = localStorage.getItem('playList')
+
+    if (playList) {
+      dispatch(Actions.videoSetSavedPlaylist(JSON.parse(playList)))
+    }
+  }, [dispatch])
 
   return (
     <>
@@ -44,6 +58,7 @@ const PageContainer: FunctionComponent = ({
         : (
           <section className={styles.container}>
             <h1 className={styles.title}>{title}</h1>
+            <PageSelector />
             <PageComponent page={activePage} />
             {children}
           </section>

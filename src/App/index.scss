@@ -1,5 +1,9 @@
 @import "./globals";
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: $pinky;
   font-family: $font-text;

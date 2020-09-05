@@ -1,5 +1,5 @@
 import {
-  Actions, ActionsTypes, ContextState, PagesType, SearchResult,
+  Actions, ActionsTypes, PagesType, SearchResult, GameType, PlayList,
 } from './store.types'
 
 const actionCreators = (
@@ -25,25 +25,40 @@ export const searchClear = (): Actions =>
 export const videoSelected = (payload: string): Actions =>
   actionCreators('video-selected', payload)
 
-export const videoSetPlayList = (): Actions =>
-  actionCreators('video-set-play-list')
+export const videoPlaySelected = (payload: string): Actions =>
+  actionCreators('video-play-selected', payload)
 
-export const videoClearPlayList = (): Actions =>
-  actionCreators('video-clear-play-list')
+export const videoSetPlaylist = (): Actions =>
+  actionCreators('video-set-playlist')
 
-export const gameInit = (payload: number): Actions =>
-  actionCreators('game-init', payload)
+export const videoSetSavedPlaylist = (payload: PlayList): Actions =>
+  actionCreators('video-set-saved-playlist', payload)
+
+export const videoClearPlaylist = (): Actions =>
+  actionCreators('video-clear-playlist')
+
+export const videoRemoveItemPlaylist = (payload: string): Actions =>
+  actionCreators('video-remove-from-playlist', payload)
+
+export const videoReadyPlaylist = (payload: string[]): Actions =>
+  actionCreators('video-ready-playlist', payload)
+
+export const gameCountSelect = (payload: number): Actions =>
+  actionCreators('game-count-select', payload)
+
+export const gameTypeSelect = (payload: GameType): Actions =>
+  actionCreators('game-type-select', payload)
+
+export const gameTypeShuffle = (payload: boolean): Actions =>
+  actionCreators('game-type-shuffle', payload)
 
 export const gameReset = (): Actions => actionCreators('game-reset')
 
 export const gameIncrease = (): Actions =>
   actionCreators('game-increase')
 
-export const fetchVideos = (payload: ContextState['videos']): Actions =>
-  actionCreators('video-fetch-list', payload)
+export const videoSetNext = (): Actions =>
+  actionCreators('video-set-next')
 
-export const playVideo = (): Actions =>
-  actionCreators('video-play-list')
-
-// export const getVideoPlayer = (payload: unknown): Actions =>
-//   actionCreators('video-get-player', payload)
+export const cardNext = (): Actions =>
+  actionCreators('card-next')

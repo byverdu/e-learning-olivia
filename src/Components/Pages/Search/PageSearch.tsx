@@ -1,18 +1,35 @@
-import React, { FunctionComponent, useContext, useCallback } from 'react';
+import React, {
+  FunctionComponent, useContext, useCallback, useMemo,
+} from 'react';
 import YouTubeSearch from 'Components/Atoms/YouTubeSearch';
 import { AppContext, Actions } from 'Store'
 
 import { getYouTubeSearchResults } from 'utils'
 import SearchResult from 'Components/Molecules/SearchResult';
-import PlayList from 'Components/Molecules/PlayList';
+import Playlist from 'Components/Molecules/Playlist';
 
 const PageSearch: FunctionComponent = () => {
   const {
-    state: { searchResult, playList },
+    state: { searchResult, playlist },
     dispatch,
   } = useContext(AppContext)
 
   const searchClearHandler = useCallback(() => dispatch(Actions.searchClear()), [dispatch])
+  const playlistClearHandler = useCallback(() => {
+    dispatch(Actions.videoClearPlaylist())
+    localStorage.removeItem('playList')
+  }, [dispatch])
+  const playlistRemoveItemHandler = useCallback(
+    (videoId: string) => dispatch(Actions.videoRemoveItemPlaylist(videoId)),
+    [dispatch],
+  )
+  const setVideoPlayLisHandler = useCallback((videoId: string) => {
+    dispatch(Actions.videoSelected(videoId))
+    dispatch(Actions.videoReadyPlaylist([videoId]))
+    dispatch(Actions.videoSetPlaylist())
+  }, [dispatch])
+  const hasPlaylist = useMemo(() => Object.keys(playlist).length > 0, [playlist])
+  const hasSearchResults = useMemo(() => Object.keys(searchResult).length > 0, [searchResult])
 
   const fetchYoutube = useCallback(async value => {
     dispatch(Actions.showLoader('Searching videos'))
@@ -29,15 +46,32 @@ const PageSearch: FunctionComponent = () => {
 
   return (
     <section>
-      {Object.keys(playList).length > 0 && <PlayList />}
+      {hasPlaylist && (
+        <Playlist
+          removeItemHandler={playlistRemoveItemHandler}
+        />
+      )}
       <YouTubeSearch onClickSearch={fetchYoutube} />
       <button
+        disabled={!hasSearchResults}
         type="button"
         onClick={searchClearHandler}
       >
         Clear Search
       </button>
-      {Object.keys(searchResult).length > 0 && <SearchResult />}
+      <button
+        disabled={!hasPlaylist}
+        type="button"
+        onClick={playlistClearHandler}
+      >
+        Clear Playlist
+      </button>
+      {hasSearchResults && (
+      <SearchResult
+        searchResult={searchResult}
+        setVideoPlayLis={setVideoPlayLisHandler}
+      />
+      )}
     </section>
   )
 }

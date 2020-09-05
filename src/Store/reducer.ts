@@ -1,17 +1,26 @@
-import { ContextState, Actions, SearchResult } from './store.types'
 import {
-  gameInitReducer,
+  ContextState, Actions, SearchResult, PagesType, GameType, PlayList,
+} from './store.types'
+import {
+  gameCountSelectReducer,
+  gameTypeSelectReducer,
   gameResetReducer,
   gameInCreaseReducer,
-  // fetchVideosReducer,
-  // playVideoReducer,
+  gameTypeShuffleReducer,
   videoSelectedReducer,
   showLoaderReducer,
   hideLoaderReducer,
   searchResolvedReducer,
   searchClearReducer,
-  videoSetPlayListReducer,
+  videoSetPlaylistReducer,
   videoPlaylistClearReducer,
+  videoRemoveItemPlaylistReducer,
+  videoSetSavedPlaylistReducer,
+  videoReadyPlaylistReducer,
+  videoSetNextReducer,
+  pageSelectorReducer,
+  videoPlaySelectedReducer,
+  cardNextReducer,
 } from './reducerActions'
 
 const reducer = (
@@ -20,8 +29,23 @@ const reducer = (
 ): ContextState => {
   const { type, payload } = action
   switch (type) {
-    case 'game-init':
-      return gameInitReducer(state, payload)
+    case 'loader-show':
+      return showLoaderReducer(state, payload as string)
+
+    case 'loader-hide':
+      return hideLoaderReducer(state)
+
+    case 'page-set-active':
+      return pageSelectorReducer(state, payload as PagesType)
+
+    case 'game-count-select':
+      return gameCountSelectReducer(state, payload as number)
+
+    case 'game-type-select':
+      return gameTypeSelectReducer(state, payload as GameType)
+
+    case 'game-type-shuffle':
+      return gameTypeShuffleReducer(state, payload as boolean)
 
     case 'game-reset':
       return gameResetReducer(state)
@@ -32,32 +56,35 @@ const reducer = (
     case 'video-selected':
       return videoSelectedReducer(state, payload as string)
 
-    case 'loader-show':
-      return showLoaderReducer(state, payload as string)
-
-    case 'loader-hide':
-      return hideLoaderReducer(state)
-
     case 'search-resolved':
       return searchResolvedReducer(state, payload as SearchResult[])
 
     case 'search-clear':
       return searchClearReducer(state)
 
-    case 'video-set-play-list':
-      return videoSetPlayListReducer(state)
+    case 'video-set-playlist':
+      return videoSetPlaylistReducer(state)
 
-    case 'video-clear-play-list':
+    case 'video-set-saved-playlist':
+      return videoSetSavedPlaylistReducer(state, payload as PlayList)
+
+    case 'video-clear-playlist':
       return videoPlaylistClearReducer(state)
 
-      // case 'video-fetch-list':
-      //   return fetchVideosReducer(state, payload)
+    case 'video-remove-from-playlist':
+      return videoRemoveItemPlaylistReducer(state, payload as string)
 
-      // case 'video-play-list':
-      //   return playVideoReducer(state)
+    case 'video-ready-playlist':
+      return videoReadyPlaylistReducer(state, payload as string[])
 
-      // case 'video-get-player':
-      //   return getVideoPlayerReducer(state, payload)
+    case 'video-set-next':
+      return videoSetNextReducer(state)
+
+    case 'video-play-selected':
+      return videoPlaySelectedReducer(state, payload as string)
+
+    case 'card-next':
+      return cardNextReducer(state)
 
     default:
       return state

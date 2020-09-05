@@ -4,6 +4,11 @@ import {
   map, switchMap, catchError, tap,
 } from 'rxjs/operators'
 
+export interface YoutubeRequest {
+  searchTerm: string;
+  videoDuration: string
+}
+
 type ThumbNail = { url: string, width: number, height: number }
 
 interface YoutubeItem {
@@ -24,9 +29,9 @@ interface YoutubeResp {
   items: YoutubeItem[]
 }
 
-const fetchData = async (params: string): Promise<Observable<YoutubeResp>> =>
+const fetchData = async (params: YoutubeRequest): Promise<Observable<YoutubeResp>> =>
   fromFetch(
-    `http://localhost:9000/youtube-search?search=${params}`,
+    `http://localhost:9000/youtube-search?search=${JSON.stringify(params)}`,
   )
   // const fetchData = async () =>
   //   from(fetch('/mockData'))
@@ -46,7 +51,7 @@ const fetchData = async (params: string): Promise<Observable<YoutubeResp>> =>
       }),
     )
 
-export const getYouTubeSearchResults = async (params: string): Promise<{
+export const getYouTubeSearchResults = async (params: YoutubeRequest): Promise<{
   videoId: string,
   thumbnail: string,
   selected: boolean
