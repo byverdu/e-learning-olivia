@@ -1,3 +1,5 @@
+@import "../../../App/globals";
+
 .score-star {
   color: transparent;
   height: 90px;
@@ -6,7 +8,7 @@
 }
 
 .active {
-  color: rgb(238, 12, 12);
+  color: $orange;
   height: 90;
 }
 
