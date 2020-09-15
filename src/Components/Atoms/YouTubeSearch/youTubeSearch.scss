@@ -1,0 +1,47 @@
+@import "../../../App/globals";
+
+.youtube-search {
+  display: flex;
+
+  .search-text {
+    align-self: center;
+    flex-grow: 1;
+    height: 30px;
+  }
+
+  .search {
+    align-items: center;
+    border: 1px solid transparent;
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+
+    &:hover {
+      border-color: $goldie;
+    }
+
+    svg {
+      width: 50px;
+    }
+  }
+
+  .video-duration {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+
+      input {
+        margin: 0 13px 0 0;
+      }
+    }
+  }
+
+  .btn {
+    @extend %group-btn;
+  }
+}

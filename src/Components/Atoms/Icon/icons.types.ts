@@ -20,6 +20,7 @@ export const iconsList = [
   'juice',
   'keys',
   'lemon',
+  'magnifier',
   'monkey',
   'motorbike',
   'nest',
