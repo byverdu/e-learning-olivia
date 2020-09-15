@@ -1,15 +1,17 @@
-.score-star {
-  color: transparent;
-  height: 90px;
-  stroke: rgb(49, 1, 1);
-  width: 90px;
-}
+@import "../../../App/globals";
 
-.active {
-  color: rgb(238, 12, 12);
-  height: 90;
-}
+.scoreboard {
+  margin: 20px 0;
 
-.pollo {
-  width: 0;
+  .score-star {
+    color: transparent;
+    height: 90px;
+    stroke: rgb(49, 1, 1);
+    width: 90px;
+  }
+
+  .active {
+    color: $orange;
+    height: 90;
+  }
 }

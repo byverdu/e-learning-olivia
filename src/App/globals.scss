@@ -6,3 +6,33 @@ $font-text: "Montserrat", sans-serif;
 // Colors
 $pinky: rgba(240, 16, 209, 0.7);
 $goldie: rgba(240, 223, 33, 0.9);
+$orange: rgb(238, 12, 12);
+$banana: rgb(251, 211, 59);
+
+%group-btn {
+  border: 0;
+  cursor: pointer;
+  font-family: $font-text;
+  font-size: 20px;
+  padding: 10px;
+  width: 220px;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &:first-of-type {
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+  }
+
+  &:last-of-type {
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  &:nth-of-type(2) {
+    border-left: 1px solid;
+    border-right: 1px solid;
+  }
+}

@@ -1,0 +1,9 @@
+@import "../../../App/globals";
+
+.page-selector {
+  margin: 10px;
+
+  .btn {
+    @extend %group-btn;
+  }
+}

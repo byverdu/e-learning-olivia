@@ -4,6 +4,8 @@ import React, {
 import { AppContext, Actions } from 'Store'
 import { PagesType } from 'Store/store.types'
 
+import styles from './pageSelector.scss';
+
 interface PageButton {
   text: string,
   id: PagesType,
@@ -43,11 +45,11 @@ const PageSelector: FunctionComponent = () => {
   }, [searchResult, playlist])
   const pageTypes: PageButton[] = useMemo(() => [
     {
-      id: 'search', text: 'Go to Search Page', disabled: activePage === 'search', onClick: clickHandler,
+      id: 'search', text: 'YouTube Search', disabled: activePage === 'search', onClick: clickHandler,
     },
     {
       id: 'game-selector',
-      text: 'Go to Game Edit',
+      text: 'Game Options',
       disabled: ((): boolean => {
         if (activePage === 'game-selector') {
           return true
@@ -76,11 +78,12 @@ const PageSelector: FunctionComponent = () => {
   ], [activePage, clickHandler, searchPageDone, gameLength])
 
   return (
-    <section>
+    <section className={styles['page-selector']}>
       {pageTypes.map(({
         id, text, disabled, onClick,
       }) => (
         <button
+          className={styles.btn}
           key={id}
           onClick={onClick}
           disabled={disabled}

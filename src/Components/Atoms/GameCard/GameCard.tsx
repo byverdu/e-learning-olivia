@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, KeyboardEvent, createRef, useEffect,
+  FunctionComponent, KeyboardEvent, createRef, useEffect, useCallback,
 } from 'react'
 import classnames from 'classnames'
 import { getNumbersWords, getRandomNumber } from 'utils';
@@ -11,7 +11,7 @@ import styles from './gameCard.scss'
 
 interface Props {
   value: string | number
-  keyupHandler: (e: KeyboardEvent) => void
+  keyupHandler: (e: KeyboardEvent, activeStyle: string) => void
 }
 
 interface CardContent {
@@ -84,9 +84,17 @@ const getCardContent = (value: string | number): CardContent => {
 const GameCard: FunctionComponent<Props> = ({ value, keyupHandler }) => {
   const cardRef = createRef<HTMLElement>()
   const cardContent = getCardContent(value)
+  const keyup = useCallback(e => {
+    keyupHandler(e, styles.active)
+  }, [keyupHandler])
 
   useEffect(() => {
-    cardRef.current.focus()
+    const currentElem = cardRef.current
+    currentElem.focus()
+
+    return () => {
+      currentElem.classList.remove(styles.active)
+    }
   }, [cardRef])
 
   return (
@@ -96,7 +104,7 @@ const GameCard: FunctionComponent<Props> = ({ value, keyupHandler }) => {
       className={styles['game-card']}
       tabIndex={0}
       role="button"
-      onKeyUp={keyupHandler}
+      onKeyUp={keyup}
     >
       <h1 className={styles.title}>
         {cardContent.title}

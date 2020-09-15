@@ -46,6 +46,10 @@ export interface PlayList {
   [key: string]: VideoItem
 }
 
+export interface Score {
+  active: boolean; id: number
+}
+
 export interface ContextState {
   activePage: PagesType
   loader: {
@@ -62,7 +66,7 @@ export interface ContextState {
     ['letters-numbers']: (string|number)[]
     'maths': number[]
   }
-  score?: { active: boolean; id: number }[]
+  score?: Score[]
   currentTrack: number
   currentCard: number
   videos?: string[]

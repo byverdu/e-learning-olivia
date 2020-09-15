@@ -16,7 +16,7 @@ const CountSelector: FunctionComponent<Props> = ({
   gameLengthOptions,
 }) => (
   <div className={styles['count-selector']}>
-    <h6>Select Game Length</h6>
+    <h6 className={styles.title}>Select Game Options</h6>
     <ul className={styles.list}>
       {gameLengthOptions.map(item => (
         <li

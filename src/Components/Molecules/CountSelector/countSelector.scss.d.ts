@@ -6,6 +6,7 @@ interface CssExports {
   'list': string;
   'list-item': string;
   'selected': string;
+  'title': string;
 }
 export const cssExports: CssExports;
 export default cssExports;

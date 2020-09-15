@@ -1,3 +1,5 @@
+@import "../../../App//globals";
+
 %text {
   margin: 0;
   padding: 10px;
@@ -14,13 +16,22 @@
   flex-direction: column;
   justify-content: space-between;
   margin: 10px;
+  max-width: 650px;
+  min-width: 350px;
   padding: 0 10px 10px;
-  width: 350px;
+
+  &:focus {
+    outline: 5px solid $banana;
+  }
 
   .title {
     @extend %text;
     border-bottom: 5px solid;
     font-size: 100px;
+  }
+
+  &.active .title::first-letter {
+    color: $banana;
   }
 
   .sub-title {

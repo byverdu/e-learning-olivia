@@ -11,13 +11,14 @@ import styles from './pageGame.scss'
 const NUMBER_0_KEY_CODE = 47
 const LETTER_Z_KEY_CODE = 91
 
-const validateTwoDigitsNumbers = ((e: KeyboardEvent) => {
+const validateTwoDigitsNumbers = ((e: KeyboardEvent, activeStyle: string) => {
   const target = e.target as HTMLElement
   const { value } = target.dataset
   let isValid = false
 
   if (value.charAt(0) === e.key && target.id !== e.key) {
     target.setAttribute('id', e.key)
+    target.classList.add(activeStyle)
   } else if (`${target.id}${e.key}` === value) {
     isValid = true
   }
@@ -32,7 +33,7 @@ const PageGame: FunctionComponent = () => {
     }, dispatch,
   } = useContext(AppContext)
   const card = games[gameType][currentCard]
-  const keyupHandler = useCallback((e: KeyboardEvent) => {
+  const keyupHandler = useCallback((e: KeyboardEvent, activeStyle: string) => {
     const target = e.target as HTMLElement
     const { value } = target.dataset
     const hasTwoDigits = value.length > 1
@@ -42,7 +43,7 @@ const PageGame: FunctionComponent = () => {
 
     if (e.keyCode > NUMBER_0_KEY_CODE && e.keyCode < LETTER_Z_KEY_CODE) {
       if (_gameType.includes('numbers') && hasTwoDigits) {
-        isValid = validateTwoDigitsNumbers(e)
+        isValid = validateTwoDigitsNumbers(e, activeStyle)
       } else if (e.key === `${value}`) {
         isValid = true
       }
@@ -64,7 +65,7 @@ const PageGame: FunctionComponent = () => {
 
   return (
     <>
-      <Scoreboard />
+      <Scoreboard score={score} />
       <div
         className={styles['page-game']}
         data-game-type={gameType}
