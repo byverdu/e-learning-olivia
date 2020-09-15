@@ -16,8 +16,13 @@
   flex-direction: column;
   justify-content: space-between;
   margin: 10px;
+  max-width: 650px;
+  min-width: 350px;
   padding: 0 10px 10px;
-  width: 350px;
+
+  &:focus {
+    outline: 5px solid $banana;
+  }
 
   .title {
     @extend %text;
@@ -26,7 +31,7 @@
   }
 
   &.active .title::first-letter {
-    color: $orange;
+    color: $banana;
   }
 
   .sub-title {

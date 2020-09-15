@@ -1,17 +1,17 @@
 @import "../../../App/globals";
 
-.score-star {
-  color: transparent;
-  height: 90px;
-  stroke: rgb(49, 1, 1);
-  width: 90px;
-}
+.scoreboard {
+  margin: 20px 0;
 
-.active {
-  color: $orange;
-  height: 90;
-}
+  .score-star {
+    color: transparent;
+    height: 90px;
+    stroke: rgb(49, 1, 1);
+    width: 90px;
+  }
 
-.pollo {
-  width: 0;
+  .active {
+    color: $orange;
+    height: 90;
+  }
 }

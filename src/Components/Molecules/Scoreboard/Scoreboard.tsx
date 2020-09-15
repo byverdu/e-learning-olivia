@@ -12,19 +12,17 @@ interface Props {
 }
 
 const Scoreboard: FunctionComponent<Props> = ({ score }: Props) => (
-  <>
-    <div>
-      {score.map(item => (
-        <Icon
-          key={item.id}
-          className={classNames(styles['score-star'], {
-            [styles.active]: item.active,
-          })}
-          name="star"
-        />
-      ))}
-    </div>
-  </>
+  <section className={styles.scoreboard}>
+    {score.map(item => (
+      <Icon
+        key={item.id}
+        className={classNames(styles['score-star'], {
+          [styles.active]: item.active,
+        })}
+        name="star"
+      />
+    ))}
+  </section>
 )
 
 export default Scoreboard
