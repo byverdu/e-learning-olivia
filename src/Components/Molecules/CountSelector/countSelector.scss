@@ -1,11 +1,16 @@
 @import "../../../App/globals";
 
 .count-selector {
+  .title {
+    font-size: 20px;
+    font-weight: 100;
+  }
+
   .list {
     align-items: center;
     display: flex;
     justify-content: space-evenly;
-    margin: 0;
+    padding: 0;
 
     &-item {
       align-items: center;
