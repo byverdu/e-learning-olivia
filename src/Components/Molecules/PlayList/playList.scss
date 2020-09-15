@@ -7,13 +7,20 @@
   align-items: center;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 15px 0;
 
   &-item {
     margin: 25px;
     position: relative;
+    width: 200px;
 
     &:active {
       cursor: grab;
+    }
+
+    img {
+      width: inherit;
     }
   }
 

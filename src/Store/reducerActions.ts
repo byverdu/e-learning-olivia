@@ -109,6 +109,7 @@ export const videoSetSavedPlaylistReducer = (
   playlist: {
     ...payload,
   },
+  videos: Object.keys(payload),
 })
 
 export const videoPlaylistClearReducer = (

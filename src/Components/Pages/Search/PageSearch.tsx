@@ -51,21 +51,13 @@ const PageSearch: FunctionComponent = () => {
           removeItemHandler={playlistRemoveItemHandler}
         />
       )}
-      <YouTubeSearch onClickSearch={fetchYoutube} />
-      <button
-        disabled={!hasSearchResults}
-        type="button"
-        onClick={searchClearHandler}
-      >
-        Clear Search
-      </button>
-      <button
-        disabled={!hasPlaylist}
-        type="button"
-        onClick={playlistClearHandler}
-      >
-        Clear Playlist
-      </button>
+      <YouTubeSearch
+        onClickSearch={fetchYoutube}
+        hasPlaylist={hasPlaylist}
+        hasSearchResults={hasSearchResults}
+        searchClearHandler={searchClearHandler}
+        playlistClearHandler={playlistClearHandler}
+      />
       {hasSearchResults && (
       <SearchResult
         searchResult={searchResult}

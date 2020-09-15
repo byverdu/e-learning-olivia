@@ -45,11 +45,11 @@ const PageSelector: FunctionComponent = () => {
   }, [searchResult, playlist])
   const pageTypes: PageButton[] = useMemo(() => [
     {
-      id: 'search', text: 'Go to Search Page', disabled: activePage === 'search', onClick: clickHandler,
+      id: 'search', text: 'YouTube Search', disabled: activePage === 'search', onClick: clickHandler,
     },
     {
       id: 'game-selector',
-      text: 'Go to Game Edit',
+      text: 'Game Options',
       disabled: ((): boolean => {
         if (activePage === 'game-selector') {
           return true
