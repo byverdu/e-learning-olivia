@@ -21,6 +21,7 @@ const validateTwoDigitsNumbers = ((e: KeyboardEvent, activeStyle: string) => {
     target.classList.add(activeStyle)
   } else if (`${target.id}${e.key}` === value) {
     isValid = true
+    target.removeAttribute('id')
   }
 
   return isValid
