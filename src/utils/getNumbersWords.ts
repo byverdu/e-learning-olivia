@@ -28,7 +28,7 @@ const numbersWords = {
   27: 'twenty-seven',
   28: 'twenty-eight',
   29: 'twenty-nine',
-  30: 'thirteen',
+  30: 'thirty',
 }
 
 export const getNumbersWords = (number: string): string => numbersWords[number]
