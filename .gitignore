@@ -2,3 +2,5 @@ node_modules
 dev-build
 .vscode
 yarn-error.log
+build
+.DS_STORE

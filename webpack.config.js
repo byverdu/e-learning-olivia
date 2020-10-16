@@ -7,6 +7,7 @@ const {
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin');
 const getBabelConfig = require('./config-babel.js')
 
 const ENV = process.env.ENV
@@ -85,6 +86,11 @@ module.exports = function () {
       new HtmlWebpackPlugin({
         template: './src/index.html',
       }),
+      new CopyPlugin({
+      patterns: [
+        { from: './static'},
+      ],
+    }),
     ],
 
     module: {

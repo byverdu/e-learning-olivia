@@ -2,8 +2,9 @@
   "name": "e-learning-olivia",
   "version": "1.0.0",
   "description": "",
-  "main": "bundle.js",
+  "main": "build/server.js",
   "scripts": {
+    "start": "node build/server.js",
     "dev": "ENV=development webpack-dev-server --watch",
     "build": "ENV=production webpack",
     "lint:ts": "eslint --ignore-pattern **/**/*.scss.d.ts . --ext .ts,.tsx",
@@ -40,6 +41,7 @@
     "babel-loader": "^8.1.0",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^6.2.1",
     "css-loader": "^3.4.2",
     "css-modules-typescript-loader": "^4.0.0",
     "eslint": "^7.6.0",
