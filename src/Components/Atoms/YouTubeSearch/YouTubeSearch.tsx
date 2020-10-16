@@ -9,7 +9,7 @@ interface Props {
   hasPlaylist: boolean
   onClickSearch: (params: YoutubeRequest) => void
   searchClearHandler: () => void
-  playlistClearHandler: (params: YoutubeRequest) => void
+  playlistClearHandler: () => void
 }
 
 type VideoDuration = 'short' | 'medium' | 'long'
