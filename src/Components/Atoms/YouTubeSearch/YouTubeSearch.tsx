@@ -52,7 +52,10 @@ const YouTubeSearch: FunctionComponent<Props> = ({
       <div className={styles['video-duration']}>
         <div className={styles.wrapper}>
           {[...videoLengths.entries()].map(([value, text]) => (
-            <label htmlFor={value}>
+            <label
+              htmlFor={value}
+              key={value}
+            >
               <input
                 defaultChecked={value === 'short'}
                 onChange={changeVideoDurationHandler}
