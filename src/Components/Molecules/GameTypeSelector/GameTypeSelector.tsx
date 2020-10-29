@@ -31,6 +31,7 @@ const GameTypeSelector: FunctionComponent<Props> = ({
     </button>
     {[...gameTypes.entries()].map(([id, text]) => (
       <button
+        disabled={id === 'maths'}
         key={id}
         data-id={id}
         type="button"
