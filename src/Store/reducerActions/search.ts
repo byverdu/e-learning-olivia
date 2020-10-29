@@ -126,7 +126,18 @@ export const videoRemoveItemPlaylistReducer = (
 export const videoReadyPlaylistReducer = (
   state: ContextState,
   payload: string[],
-): ContextState => ({
-  ...state,
-  videos: payload.length === 1 ? [...state.videos, ...payload] : payload,
-})
+): ContextState => {
+  const videos = payload.length === 1 ? [...state.videos, ...payload] : payload
+  const playlist = videos.reduce((prev, curr) => ({
+    ...prev,
+    [curr]: {
+      ...state.playlist[curr],
+    },
+  }), {})
+
+  return ({
+    ...state,
+    videos,
+    playlist,
+  })
+}

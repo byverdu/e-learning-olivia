@@ -13,7 +13,7 @@ interface PageButton {
   onClick: (e: SyntheticEvent) => void
 }
 
-const emptyCollection = (
+const checkCollectionLength = (
   collection: Record<string, unknown>,
   type: 'bigger' | 'equal',
 ) => (type === 'equal'
@@ -33,11 +33,11 @@ const PageSelector: FunctionComponent = () => {
     localStorage.setItem('playList', JSON.stringify(playlist))
   }, [dispatch, playlist])
   const searchPageDone = useCallback(() => {
-    if (emptyCollection(playlist, 'bigger')) {
+    if (checkCollectionLength(playlist, 'bigger')) {
       return false
     }
 
-    if (emptyCollection(searchResult, 'equal')) {
+    if (checkCollectionLength(searchResult, 'equal')) {
       return true
     }
 
