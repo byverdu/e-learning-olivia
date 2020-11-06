@@ -41,7 +41,7 @@ module.exports = function () {
         app.get('/youtube-search', (req, res) => {
           const { search } = req.query
           const { searchTerm, videoDuration  } = JSON.parse(search)
-          const youtubeAPIUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&&type=video&videoDuration=${videoDuration}&q=${searchTerm}&key=${process.env.YOUTUBE_API_KEY}`
+          const youtubeAPIUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=60&&type=video&videoDuration=${videoDuration}&q=${searchTerm}&key=${process.env.YOUTUBE_API_KEY}`
 
           console.log(youtubeAPIUrl)
           ;(async () => {
