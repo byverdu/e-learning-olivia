@@ -31,7 +31,7 @@ interface YoutubeResp {
 
 const fetchData = async (params: YoutubeRequest): Promise<Observable<YoutubeResp>> =>
   fromFetch(
-    `http://localhost:9000/youtube-search?search=${JSON.stringify(params)}`,
+    `http://${process.env.API_URL}:9000/youtube-search?search=${JSON.stringify(params)}`,
   )
   // const fetchData = async () =>
   //   from(fetch('/mockData'))

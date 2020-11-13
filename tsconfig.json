@@ -14,7 +14,8 @@
       "ES2017"
     ],
     "types": [
-      "youtube"
+      "youtube",
+      "node"
     ]
   },
   "include": [
