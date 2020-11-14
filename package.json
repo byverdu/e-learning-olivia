@@ -5,8 +5,8 @@
   "main": "build/server.js",
   "scripts": {
     "start": "node build/server.js",
-    "dev": "ENV=development API_URL=localhost webpack-dev-server --watch",
-    "build": "ENV=production API_URL=oli.byverdu.es webpack",
+    "dev": "ENV=development webpack-dev-server --watch",
+    "build": "ENV=production webpack",
     "lint:ts": "eslint --ignore-pattern **/**/*.scss.d.ts . --ext .ts,.tsx",
     "lint:ts:fix": "eslint --ignore-pattern **/**/*.scss.d.ts . --ext .ts,.tsx --fix",
     "lint:css": "stylelint **/**/*scss",
