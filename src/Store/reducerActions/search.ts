@@ -35,9 +35,15 @@ export const videoSelectedReducer = (
   payload: string,
 ): ContextState => {
   const selectedVideo = state.searchResult[payload]
+  // const { playlist } = state;
+
+  // if (selectedVideo.selected) {
+  //   delete playlist[payload];
+  // }
 
   return ({
     ...state,
+    // playlist,
     searchResult: {
       ...state.searchResult,
       [selectedVideo.videoId]: {
@@ -127,8 +133,25 @@ export const videoReadyPlaylistReducer = (
   state: ContextState,
   payload: string[],
 ): ContextState => {
-  const videos = payload.length === 1 ? [...state.videos, ...payload] : payload
-  const playlist = videos.reduce((prev, curr) => ({
+  const { videos, playlist } = state
+  const repeatedVideo = payload.length === 1 && videos.includes(payload[0])
+
+  if (repeatedVideo) {
+    const videoId = payload[0]
+    const videoIndex = videos.indexOf(videoId)
+
+    videos.splice(videoIndex, 1);
+    delete playlist[videoId];
+
+    return ({
+      ...state,
+      videos,
+      playlist,
+    })
+  }
+
+  const newVideos = payload.length === 1 ? [...videos, ...payload] : payload
+  const newPlaylist = videos.reduce((prev, curr) => ({
     ...prev,
     [curr]: {
       ...state.playlist[curr],
@@ -137,7 +160,9 @@ export const videoReadyPlaylistReducer = (
 
   return ({
     ...state,
-    videos,
-    playlist,
+    videos: newVideos,
+    playlist: {
+      ...newPlaylist,
+    },
   })
 }
