@@ -42,6 +42,7 @@ const Playlist: FunctionComponent<Props> = ({ removeItemHandler }) => {
             const videoIds = Array.from(document.querySelectorAll('div[data-playlist]'))
               .map((item: HTMLDivElement) => item.dataset.id)
             dispatch(Actions.videoReadyPlaylist(videoIds))
+            dispatch(Actions.videoSetPlaylist())
           }}
           className={styles['playlist-item']}
           key={videoId}

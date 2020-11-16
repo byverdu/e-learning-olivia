@@ -26,7 +26,7 @@ function smoothScrollTo(elem: HTMLElement, direction: 'left' | 'right') {
 }
 
 const VideoSelector: FunctionComponent = () => {
-  const { state: { playlist }, dispatch } = useContext(AppContext)
+  const { state: { playlist, videos }, dispatch } = useContext(AppContext)
   const scrollAbleArea = createRef<HTMLElement>()
   const scrollHandler = useCallback((e: SyntheticEvent) => {
     smoothScrollTo(scrollAbleArea.current, (e.target as HTMLElement).dataset.direction as 'left' | 'right')
@@ -64,16 +64,19 @@ const VideoSelector: FunctionComponent = () => {
         className={styles.container}
         ref={scrollAbleArea}
       >
-        {Object.values(playlist).map(item => (
-          <img
-            onClick={clickSelectVideoHandler}
-            className={styles.thumbnail}
-            key={item.videoId}
-            data-id={item.videoId}
-            alt="video"
-            src={item.thumbnail}
-          />
-        )) }
+        {videos.map(videoId => {
+          const playlistItem = playlist[videoId]
+          return (
+            <img
+              onClick={clickSelectVideoHandler}
+              className={styles.thumbnail}
+              key={playlistItem.videoId}
+              data-id={playlistItem.videoId}
+              alt="video"
+              src={playlistItem.thumbnail}
+            />
+          )
+        }) }
       </section>
     </section>
   )
