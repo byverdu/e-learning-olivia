@@ -1,24 +1,24 @@
-import React, { FunctionComponent, useCallback, useState } from 'react'
+import React, { FunctionComponent, useCallback, useState } from 'react';
 
-import { YoutubeRequest } from 'utils/getYouTubeSearchResults'
-import Icon from 'Components/Atoms/Icon'
-import styles from './youTubeSearch.scss'
+import { YoutubeRequest } from 'utils/getYouTubeSearchResults';
+import Icon from 'Components/Atoms/Icon';
+import styles from './youTubeSearch.scss';
 
 interface Props {
-  hasSearchResults: boolean
-  hasPlaylist: boolean
-  onClickSearch: (params: YoutubeRequest) => void
-  searchClearHandler: () => void
-  playlistClearHandler: () => void
+  hasSearchResults: boolean;
+  hasPlaylist: boolean;
+  onClickSearch: (params: YoutubeRequest) => void;
+  searchClearHandler: () => void;
+  playlistClearHandler: () => void;
 }
 
-type VideoDuration = 'short' | 'medium' | 'long'
+type VideoDuration = 'short' | 'medium' | 'long';
 
 const videoLengths = new Map<VideoDuration, string>([
   ['long', '+ 20 minutes'],
   ['medium', '4 to 20 minutes'],
   ['short', '4 minutes'],
-])
+]);
 
 const YouTubeSearch: FunctionComponent<Props> = ({
   hasPlaylist,
@@ -27,18 +27,24 @@ const YouTubeSearch: FunctionComponent<Props> = ({
   searchClearHandler,
   playlistClearHandler,
 }) => {
-  const [searchTerm, setSearchTerm] = useState('')
-  const [videoDuration, setVideoDuration] = useState<VideoDuration>('short')
+  const [searchTerm, setSearchTerm] = useState('');
+  const [videoDuration, setVideoDuration] = useState<VideoDuration>('short');
   const clickHandler = useCallback(() => {
-    onClickSearch({ searchTerm, videoDuration })
-  }, [searchTerm, onClickSearch, videoDuration])
+    onClickSearch({ searchTerm, videoDuration });
+  }, [searchTerm, onClickSearch, videoDuration]);
 
-  const changeValueHandler = useCallback(e => {
-    setSearchTerm(e.target.value)
-  }, [setSearchTerm])
-  const changeVideoDurationHandler = useCallback(e => {
-    setVideoDuration(e.target.value)
-  }, [setVideoDuration])
+  const changeValueHandler = useCallback(
+    e => {
+      setSearchTerm(e.target.value);
+    },
+    [setSearchTerm],
+  );
+  const changeVideoDurationHandler = useCallback(
+    e => {
+      setVideoDuration(e.target.value);
+    },
+    [setVideoDuration],
+  );
 
   return (
     <section className={styles['youtube-search']}>
@@ -46,8 +52,12 @@ const YouTubeSearch: FunctionComponent<Props> = ({
         className={styles['search-text']}
         onChange={changeValueHandler}
         type="text"
-        autoComplete="true"
         placeholder="Search Term..."
+        onKeyDown={e => {
+          if (e.key === 'Enter') {
+            clickHandler();
+          }
+        }}
       />
       <div className={styles['video-duration']}>
         <div className={styles.wrapper}>
@@ -75,9 +85,7 @@ const YouTubeSearch: FunctionComponent<Props> = ({
         role="button"
         onClick={clickHandler}
       >
-        <Icon
-          name="magnifier"
-        />
+        <Icon name="magnifier" />
       </div>
       <button
         className={styles.btn}
@@ -96,7 +104,7 @@ const YouTubeSearch: FunctionComponent<Props> = ({
         Clear Playlist
       </button>
     </section>
-  )
-}
+  );
+};
 
-export default YouTubeSearch
+export default YouTubeSearch;
