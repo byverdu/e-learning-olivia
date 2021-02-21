@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react'
+import { getRandomNumber } from 'utils'
 import { AppState } from 'Store/store.types'
 
 import SearchCard from 'Components/Atoms/SearchCard'
@@ -15,7 +16,7 @@ const SearchResult: FunctionComponent<Props> = ({ setVideoPlayLis, searchResult 
     <section className={styles['search-result']}>
       {Object.values(searchResult).map(({ videoId, thumbnail, selected }) => (
         <SearchCard
-          key={videoId}
+          key={getRandomNumber()}
           selected={selected}
           onCardClick={setVideoPlayLis}
           videoId={videoId}

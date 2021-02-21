@@ -2,6 +2,7 @@ import React, {
   FunctionComponent, useContext, useCallback, SyntheticEvent, DragEvent, useState,
 } from 'react'
 import { AppContext, Actions } from 'Store'
+import { getRandomNumber } from 'utils'
 
 import styles from './playlist.scss'
 
@@ -45,7 +46,7 @@ const Playlist: FunctionComponent<Props> = ({ removeItemHandler }) => {
             dispatch(Actions.videoSetPlaylist())
           }}
           className={styles['playlist-item']}
-          key={videoId}
+          key={getRandomNumber()}
         >
           <button
             className={styles['clear-btn']}

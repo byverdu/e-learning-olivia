@@ -35,15 +35,9 @@ export const videoSelectedReducer = (
   payload: string,
 ): ContextState => {
   const selectedVideo = state.searchResult[payload]
-  // const { playlist } = state;
-
-  // if (selectedVideo.selected) {
-  //   delete playlist[payload];
-  // }
 
   return ({
     ...state,
-    // playlist,
     searchResult: {
       ...state.searchResult,
       [selectedVideo.videoId]: {
@@ -112,6 +106,12 @@ export const videoRemoveItemPlaylistReducer = (
   payload: string,
 ): ContextState => {
   const searchResultItem = state.searchResult[payload]
+  const videos = [...state.videos].map(videoId => {
+    if (videoId === payload) {
+      return undefined
+    }
+    return videoId
+  }).filter(Boolean)
   const playlist = {
     ...state.playlist,
   }
@@ -119,6 +119,7 @@ export const videoRemoveItemPlaylistReducer = (
   return {
     ...state,
     playlist,
+    videos,
     searchResult: {
       ...state.searchResult,
       [payload]: {
