@@ -23,8 +23,8 @@ export default function withScriptLoader(WrappedComponent: FunctionComponent<any
 
     componentDidMount() {
       this.loadScript()
-        .then(resp => {
-          resp.previousElementSibling.addEventListener('load', () => {
+        .then(() => {
+          window.addEventListener('load', () => {
             if (YT) {
               this.setState({
                 player: YT,
@@ -42,7 +42,7 @@ export default function withScriptLoader(WrappedComponent: FunctionComponent<any
         script.async = true
         script.src = this.scriptSrc
         script.onload = () => resolve(script)
-        script.onerror = reject
+        script.onerror = () => reject(new Error(`${this.scriptSrc} failed to load.`))
 
         const firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(script, firstScriptTag);
