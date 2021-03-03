@@ -62,6 +62,9 @@ export default class YouTubeVideo extends Component<Props, State, Context> {
   }
 
   componentWillUnmount() {
+    const { dispatch } = this.context
+
+    dispatch(Actions.gameReset())
     this.player.destroy()
   }
 
