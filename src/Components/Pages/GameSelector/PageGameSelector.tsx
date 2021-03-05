@@ -16,7 +16,7 @@ const gameTypes = new Map<GameType, string>([
 
 const PageGameSelector: FunctionComponent = () => {
   const [shuffledItems, setShuffledItems] = useState(false)
-  const { dispatch, state: { gameLength, gameType, games } } = useContext(AppContext)
+  const { dispatch, state: { gameLength, gameType } } = useContext(AppContext)
   const selectOptionHandler = useCallback(
     (e: React.SyntheticEvent) => {
       const payload = (e.currentTarget as HTMLElement).dataset.id
@@ -33,8 +33,6 @@ const PageGameSelector: FunctionComponent = () => {
     setShuffledItems(newValue)
     dispatch(Actions.gameTypeShuffle(newValue))
   }, [setShuffledItems, shuffledItems, dispatch])
-
-  console.log(games.numbers)
 
   return (
     <section>
