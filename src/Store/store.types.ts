@@ -24,7 +24,7 @@ export type ActionsTypes =
 
 export type PagesType = 'search' | 'game-selector' | 'game' | 'video'
 
-export type GameType = 'letters' | 'numbers' | 'letters-numbers' | 'maths'
+export type GameType = 'letters' | 'numbers' | 'letters-numbers' | 'maths' | 'spelling'
 
 export interface Actions {
   type: ActionsTypes
@@ -65,6 +65,7 @@ export interface ContextState {
     'numbers': number[]
     ['letters-numbers']: (string|number)[]
     'maths': number[]
+    'spelling': string[]
   }
   score?: Score[]
   currentTrack: number

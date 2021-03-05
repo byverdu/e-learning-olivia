@@ -1,8 +1,9 @@
 import React, {
-  FunctionComponent, KeyboardEvent, createRef, useEffect, useCallback,
+  FunctionComponent, KeyboardEvent, createRef, useEffect, useCallback, ReactElement,
 } from 'react'
 import classnames from 'classnames'
 import { getNumbersWords, getRandomNumber } from 'utils';
+import { GameType } from 'Store/store.types';
 import { iconsList, SvgIcons } from '../Icon/icons.types';
 
 import Icon from '../Icon';
@@ -11,7 +12,12 @@ import styles from './gameCard.scss'
 
 interface Props {
   value: string | number
-  keyupHandler: (e: KeyboardEvent, activeStyle: string) => void
+  keyupHandler: (
+    e: KeyboardEvent,
+    activeStyle: string,
+    isValidSpelling?: boolean[],
+  ) => void
+  gameType: GameType
 }
 
 interface CardContent {
@@ -81,38 +87,58 @@ const getCardContent = (value: string | number): CardContent => {
   }
 }
 
-const GameCard: FunctionComponent<Props> = ({ value, keyupHandler }) => {
+const SpellingLettersGame: FunctionComponent<{word: string}> = ({
+  word,
+}): ReactElement<HTMLHeadingElement> => {
+  const wordToLetters = word.split('').map((letter, index) => (
+    <span
+      // eslint-disable-next-line react/no-array-index-key
+      key={`${index}-${letter}`}
+      data-index={index}
+    >
+      {letter}
+    </span>
+  ))
+
+  return <h2 className={styles['sub-title']}>{wordToLetters}</h2>
+}
+
+const GameCard: FunctionComponent<Props> = ({ value, keyupHandler, gameType }) => {
+  const isValidSpelling = []
   const cardRef = createRef<HTMLElement>()
-  const cardContent = getCardContent(value)
+  const { title, subTitle, icon } = getCardContent(value)
   const keyup = useCallback(e => {
-    keyupHandler(e, styles.active)
-  }, [keyupHandler])
+    keyupHandler(e, styles.active, isValidSpelling)
+  }, [keyupHandler, isValidSpelling])
 
   useEffect(() => {
     const currentElem = cardRef.current
     currentElem.focus()
 
     return () => {
-      currentElem.classList.remove(styles.active)
+      currentElem.querySelectorAll(`.${styles.active}`).forEach(item => item.classList.remove(styles.active))
     }
   }, [cardRef])
 
   return (
     <section
       ref={cardRef}
-      data-value={value}
+      data-value={gameType === 'spelling' ? subTitle : value}
       className={styles['game-card']}
       tabIndex={0}
       role="button"
       onKeyUp={keyup}
     >
       <h1 className={styles.title}>
-        {cardContent.title}
+        {title}
       </h1>
       <div className={styles['icons-container']}>
-        {cardContent.icon}
+        {icon}
       </div>
-      <h2 className={styles['sub-title']}>{cardContent.subTitle}</h2>
+      {gameType === 'spelling'
+        ? <SpellingLettersGame word={subTitle} />
+        : <h2 className={styles['sub-title']}>{subTitle}</h2>}
+
     </section>
   )
 }

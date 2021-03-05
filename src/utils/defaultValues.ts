@@ -13,6 +13,7 @@ export const getDefaultValues = (gameType: GameType): DefaultGameValues => {
     numbers: [...defaultNumbersGame],
     'letters-numbers': arrayShuffle([...defaultLettersGame, ...defaultNumbersGame]) as (number|string)[],
     maths: [],
+    spelling: [...defaultLettersGame],
   }
 
   return defaultValues[gameType]

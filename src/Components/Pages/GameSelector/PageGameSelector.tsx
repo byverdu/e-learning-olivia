@@ -10,6 +10,7 @@ const gameTypes = new Map<GameType, string>([
   ['letters', 'Only Letters'],
   ['numbers', 'Only Numbers'],
   ['letters-numbers', 'Letters & Numbers'],
+  ['spelling', 'Some Spelling'],
   ['maths', 'Some maths'],
 ])
 

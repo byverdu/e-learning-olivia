@@ -38,7 +38,11 @@
     @extend %text;
     border-top: 5px solid;
     font-size: 70px;
-    text-transform: capitalize;
+    text-transform: uppercase;
+
+    .active {
+      color: $banana;
+    }
   }
 
   .icons-container {

@@ -15,7 +15,7 @@ export const iconsList = [
   'flower',
   'giraffe',
   'hamburger',
-  'ice-cream',
+  'ice cream',
   'ipad',
   'juice',
   'keys',

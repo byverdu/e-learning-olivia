@@ -53,7 +53,27 @@ const PageGame: FunctionComponent = () => {
         dispatch(Actions.gameIncrease())
         dispatch(Actions.cardNext())
       }
-      console.log(e.key, e.keyCode, isValid ? 'yeiii' : 'nope')
+    }
+  }, [dispatch])
+
+  const keyupHandlerSpelling = useCallback((
+    e: KeyboardEvent,
+    activeStyle?: string,
+    isValidSpelling?: boolean[],
+  ) => {
+    const target = e.target as HTMLElement
+    const { value } = target.dataset
+    const wordLetters = value.split('')
+    const currentLetter = isValidSpelling.length
+
+    if (e.key === wordLetters[currentLetter]) {
+      isValidSpelling.push(true);
+      target.querySelector(`[data-index="${currentLetter}"]`).classList.add(activeStyle)
+    }
+
+    if (isValidSpelling.length === wordLetters.length && isValidSpelling.every(Boolean)) {
+      dispatch(Actions.gameIncrease())
+      dispatch(Actions.cardNext())
     }
   }, [dispatch])
 
@@ -72,8 +92,9 @@ const PageGame: FunctionComponent = () => {
         data-game-type={gameType}
       >
         <GameCard
+          gameType={gameType}
           value={card}
-          keyupHandler={keyupHandler}
+          keyupHandler={gameType === 'spelling' ? keyupHandlerSpelling : keyupHandler}
         />
       </div>
     </>
