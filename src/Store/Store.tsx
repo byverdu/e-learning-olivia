@@ -33,6 +33,7 @@ const Store: FunctionComponent<Props> = ({ children, player }) => {
       numbers: [...getDefaultValues('numbers') as number[]],
       'letters-numbers': [...getDefaultValues('letters-numbers')],
       maths: [],
+      spelling: [...getDefaultValues('letters') as string[]],
     },
     score: [],
     currentTrack: 0,
