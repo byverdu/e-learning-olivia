@@ -12,7 +12,7 @@ interface Props {
   name: SvgIcons
 }
 
-const fetchIcon = async (name: SvgIcons) => {
+const fetchIcon = async (name: SvgIcons = 'apple') => {
   try {
     const icon = await import(`./svgs/${name}.svg`)
 

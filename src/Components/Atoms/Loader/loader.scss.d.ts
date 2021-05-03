@@ -5,6 +5,7 @@ interface CssExports {
   'loader': string;
   'loader-container': string;
   'loader-img': string;
+  'loader-no-background': string;
   'loader-text': string;
   'medium': string;
   'small': string;

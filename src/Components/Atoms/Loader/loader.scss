@@ -6,6 +6,23 @@
   justify-content: center;
   width: 100%;
 
+  &-no-background {
+    background: none;
+    height: auto;
+    position: absolute;
+    width: 0;
+
+    .loader-img {
+      border-radius: 0;
+      box-shadow: none;
+      mix-blend-mode: soft-light;
+    }
+
+    .loader-text {
+      color: rgb(12, 11, 11);
+    }
+  }
+
   &-container {
     display: flex;
     justify-content: center;

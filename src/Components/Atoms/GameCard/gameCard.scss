@@ -28,10 +28,10 @@
     @extend %text;
     border-bottom: 5px solid;
     font-size: 100px;
-  }
 
-  &.active .title::first-letter {
-    color: $banana;
+    &-highlight-first-letter::first-letter {
+      color: $banana;
+    }
   }
 
   .sub-title {

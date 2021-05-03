@@ -13,6 +13,7 @@ interface CssExports {
   'sub-title': string;
   'tiny': string;
   'title': string;
+  'title-highlight-first-letter': string;
 }
 export const cssExports: CssExports;
 export default cssExports;

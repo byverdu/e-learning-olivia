@@ -18,7 +18,7 @@ const validateTwoDigitsNumbers = ((e: KeyboardEvent, activeStyle: string) => {
 
   if (value.charAt(0) === e.key && target.id !== e.key) {
     target.setAttribute('id', e.key)
-    target.classList.add(activeStyle)
+    target.querySelector('[class*=gameCard__title]').classList.add(activeStyle)
   } else if (`${target.id}${e.key}` === value) {
     isValid = true
     target.removeAttribute('id')

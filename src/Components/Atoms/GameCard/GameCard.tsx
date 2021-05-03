@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, KeyboardEvent, createRef, useEffect, useCallback, ReactElement,
+  FunctionComponent, KeyboardEvent, createRef, useEffect, useCallback, ReactElement, useState,
 } from 'react'
 import classnames from 'classnames'
 import { getNumbersWords, getRandomNumber } from 'utils';
@@ -7,6 +7,7 @@ import { GameType } from 'Store/store.types';
 import { iconsList, SvgIcons } from '../Icon/icons.types';
 
 import Icon from '../Icon';
+import Loader from '../Loader';
 
 import styles from './gameCard.scss'
 
@@ -104,42 +105,59 @@ const SpellingLettersGame: FunctionComponent<{word: string}> = ({
 }
 
 const GameCard: FunctionComponent<Props> = ({ value, keyupHandler, gameType }) => {
+  const [isLoading, setIsLoading] = useState(false)
   const isValidSpelling = []
   const cardRef = createRef<HTMLElement>()
   const { title, subTitle, icon } = getCardContent(value)
   const keyup = useCallback(e => {
-    keyupHandler(e, styles.active, isValidSpelling)
+    keyupHandler(e, styles['title-highlight-first-letter'], isValidSpelling)
   }, [keyupHandler, isValidSpelling])
 
   useEffect(() => {
     const currentElem = cardRef.current
-    currentElem.focus()
+    if (icon) {
+      setIsLoading(false)
+    }
+
+    if (!isLoading) {
+      currentElem.focus()
+    }
 
     return () => {
-      currentElem.querySelectorAll(`.${styles.active}`).forEach(item => item.classList.remove(styles.active))
+      currentElem.querySelectorAll(`.${styles['title-highlight-first-letter']}`).forEach(item => item.classList.remove(styles['title-highlight-first-letter']))
     }
-  }, [cardRef])
+  }, [cardRef, icon, isLoading])
 
   return (
-    <section
-      ref={cardRef}
-      data-value={gameType === 'spelling' ? subTitle : value}
-      className={styles['game-card']}
-      tabIndex={0}
-      role="button"
-      onKeyUp={keyup}
-    >
-      <h1 className={styles.title}>
-        {title}
-      </h1>
-      <div className={styles['icons-container']}>
-        {icon}
-      </div>
-      {gameType === 'spelling'
-        ? <SpellingLettersGame word={subTitle} />
-        : <h2 className={styles['sub-title']}>{subTitle}</h2>}
+    <>
+      {isLoading ? (
+        <Loader
+          size="medium"
+          removeBackground
+          text="Loading Card!"
+        />
+      ) : (
+        <section
+          ref={cardRef}
+          data-value={gameType === 'spelling' ? subTitle : value}
+          className={styles['game-card']}
+          tabIndex={0}
+          role="button"
+          onKeyUp={keyup}
+        >
+          <h1 className={styles.title}>
+            {title}
+          </h1>
+          <div className={styles['icons-container']}>
+            {icon}
+          </div>
+          {gameType === 'spelling'
+            ? <SpellingLettersGame word={subTitle} />
+            : <h2 className={styles['sub-title']}>{subTitle}</h2>}
 
-    </section>
+        </section>
+      )}
+    </>
   )
 }
 
