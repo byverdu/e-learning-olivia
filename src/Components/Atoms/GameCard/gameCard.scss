@@ -29,8 +29,14 @@
     border-bottom: 5px solid;
     font-size: 100px;
 
-    &-highlight-first-letter::first-letter {
-      color: $banana;
+    &-highlight-first-letter {
+      &::first-letter {
+        color: $banana;
+      }
+
+      &:is(span) {
+        color: $banana;
+      }
     }
   }
 
